@@ -1,6 +1,7 @@
 /**
  * Este código foi adaptado de um documento PDF.
- * Fonte: Desenvolvimento de uma Arquitetura Baseada em Sprites para criação de Jogos 2D em Ambientes Reconfiguráveis utilizando dispositivos FPGA, Gabriel B. Alves e Anfranserai M. Dias, Páginas 9-10
+ * Fonte: Desenvolvimento de uma Arquitetura Baseada em Sprites para criação de Jogos 2D em Ambientes Reconfiguráveis utilizando dispositivos FPGA,
+ * Gabriel B. Alves e Anfranserai M. Dias, Páginas 9-10
  * URL:  https://drive.google.com/file/d/1MlIlpB9TSnoPGEMkocr36EH9-CFz8psO/view
  */
 
