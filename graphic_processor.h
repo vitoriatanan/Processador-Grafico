@@ -60,35 +60,44 @@ int set_sprite(int registrador, int x, int y, int offset, int activation_bit);
 
 
 /**
- * Modelar o background através de preenchimento dos blocos
- * @param column
- * @param line
- * @param R
- * @param G
- * @param B
- * @return 
+ * Modelar o background através de preenchimento dos blocos.
+ * 
+ * @param column    Valor da coluna que representa o bloco a ser preenchido.
+ * @param line      Valor da linha que representa o bloco a ser preenchido.
+ * @param R         Componente da cor vermelha.
+ * @param G         Componente da cor verde.
+ * @param B         Componente da cor azul.
+ * @return          1 caso operação seja bem sucedida, e 0 caso contrário.
 */
 int set_background_block(int column, int line, int R, int G, int B);
 
 /**
- * @param R
- * @param G
- * @param B
- * @return 
+ * Configura a cor base do background.
+ * 
+ * @param R   Componente da cor vermelha.
+ * @param G   Componente da cor verde.
+ * @param B   Componente da cor azul.
+ * @return    1 caso operação seja bem sucedida, e 0 caso contrário.
 */
 int set_background_color(int R, int G, int B);
 
+
 /**
- * @param sp
- * @param mirror
+ * Responsável por atualizar as coordenadas x e y de um sprit móvel
+ * de acordo ao seu ângulo de movimento e valor de deslocamento.
+ * 
+ * @param sp       Passagem por referência
+ * @param mirror   Coordenadas do sprite
 */
 void increase_coordinate(Sprite *sp, int mirror);
 
 
 /**
- * @param sp1
- * @param sp2
- * @return 
+ * Verifica se ocorreu uma colisão entre dois sprites quaisquer.
+ * 
+ * @param sp1   Passagem por referência da coord_x.
+ * @param sp2   Passagem por referência da coord_y.
+ * @return      1 caso operação seja bem sucedida, e 0 caso contrário.
 */
 int collision(Sprite *sp1, Sprite *sp2);
 
