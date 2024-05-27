@@ -6,7 +6,7 @@
 #define dataA_BASE 0x80
 #define dataB_BASE 0x70
 
-int set_background_color(int R, int G, int B, volatile int *dataA,  volatile *dataB) {
+int set_background_color(int R, int G, int B, volatile int *dataA,  volatile int *dataB) {
     *dataA = (0x0000 | 0x00000); //opcode para WBR e endereço do registrador
     *dataB = (R << 16) | (G << 8) | B; // cor rosa
 
