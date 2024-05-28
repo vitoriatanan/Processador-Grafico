@@ -5,6 +5,11 @@
 #include <asm/io.h>
 #include "./address_map_arm.h"
 
+// Module metadata
+MODULE_AUTHOR("TEC499-TP02-G02");
+MODULE_DESCRIPTION("Módulo pro processador gráfico");
+MODULE_LICENSE("GPL");
+
 void * LW_virtual; // Lightweight bridge base address
 volatile int* data_a_ptr;
 volatile int* data_b_ptr;
