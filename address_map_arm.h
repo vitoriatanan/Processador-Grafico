@@ -1,3 +1,8 @@
+/* Barramentos GPU */
+#define DATA_A_BASE 0x80
+#define DATA_B_BASE 0x70
+#define START_BASE 0xc0
+
 /* Memory */
 #define DDR_BASE 0x00000000
 #define DDR_SPAN 0x3FFFFFFF
