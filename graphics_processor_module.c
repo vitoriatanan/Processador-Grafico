@@ -9,6 +9,7 @@
 #include "./address_map_arm.h"
 
 // https://www.youtube.com/watch?v=oX9ZwMQL2f4&ab_channel=FastbitEmbeddedBrainAcademy
+// https://www.youtube.com/watch?v=DwwZR0EE_1A&list=PLlrqp8hxLfoqSIQFrGbAM5lv5uAnZBB61&index=2&ab_channel=TechoGenius
 
 // tamanho maximo do dado que vai ser enviado pra ca (64bit??)
 #define MAX_SIZE 64
@@ -58,13 +59,19 @@ static void __init iniciar (void) {
     data_b_ptr = (int *) (LW_virtual + DATA_B_BASE);
     start_ptr = (int *) (LW_virtual + START_BASE);
 
-    printk(KERN_INFO "Módulo carregado no sistema\n");
+    printk(KERN_INFO "Driver carregado no sistema\n");
 
 }
 
 static void __exit parar(void) {
+	device_destroy(class, device_number);
+	class_destroy(class);
+	cdev_del(&cdev);
+	unregister_chrdev_region(device_number, DEVICE_COUNT);
     iounmap (LW_virtual);
-	//unregisterchardevregion(device_number, devicecount)
+
+    printk(KERN_INFO "Driver removido do sistema\n");
+		
 }
 
 // funçoes pro driver de dispositivo de caracteres
@@ -79,9 +86,12 @@ static int device_release(struct inode *inode, struct file *file) {
 }
 
 static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_t *offset) {
+	copy_to_user(buffer, msg, MAX_SIZE);
 }
 
 static ssize_t device_write(struct file *filp, const char *buffer, size_t length, loff_t *offset) {
+	copy_from_user(msg, buffer, length);
+	//sscanf();
 }
 
 static int set_background_color(int R, int G, int B) {
@@ -94,10 +104,8 @@ static int set_background_color(int R, int G, int B) {
 
 // Module metadata
 MODULE_AUTHOR("TEC499-TP02-G02");
-MODULE_DESCRIPTION("Módulo pro processador gráfico");
+MODULE_DESCRIPTION("Driver de caracter pro processador gráfico");
 MODULE_LICENSE("GPL");
 
-
-
 module_init(iniciar);
-module_exit(sair);
+module_exit(parar);
