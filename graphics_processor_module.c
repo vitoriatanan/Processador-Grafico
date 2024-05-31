@@ -5,6 +5,7 @@
 #include <linux/fs.h>
 #include <asm/io.h>
 #include <linux/cdev.h>
+#include <linux/device.h>
 #include "./address_map_arm.h"
 
 // https://www.youtube.com/watch?v=oX9ZwMQL2f4&ab_channel=FastbitEmbeddedBrainAcademy
@@ -25,8 +26,10 @@ volatile int* data_b_ptr;
 volatile int* start_ptr;
 
 static char msg[MAX_SIZE]; // array pra guardar a msg que vai chegar
+// variaveis necessarias pro modulo
 static dev_t device_number = 0;
 static struct cdev cdev;
+static struct class *class = NULL;
 
 static struct file_operations fops = {
     .owner = THIS_MODULE,
@@ -45,6 +48,9 @@ static void __init iniciar (void) {
     cdev.owner = THIS_MODULE;
     
     cdev_add(&cdev, &device_number, BASE_MINOR);
+    class = class_create (THIS_MODULE, DEVICE_NAME);
+	device_create (class, NULL, device_number, NULL, DEVICE_NAME);
+    
     // generate a virtual address for the FPGA lightweight bridge
     LW_virtual = ioremap_nocache (LW_BRIDGE_BASE, LW_BRIDGE_SPAN);
 
