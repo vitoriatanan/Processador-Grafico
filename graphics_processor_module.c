@@ -52,6 +52,8 @@ static void __init iniciar (void) {
     data_b_ptr = (int *) (LW_virtual + DATA_B_BASE);
     start_ptr = (int *) (LW_virtual + START_BASE);
 
+    printk(KERN_INFO "Módulo carregado no sistema\n");
+
 }
 
 static void __exit parar(void) {
@@ -61,9 +63,11 @@ static void __exit parar(void) {
 // funçoes pro driver de dispositivo de caracteres
 // chamada qdo algum processo abre o arquivo
 static int device_open(struct inode *inode, struct file *file) {
+    printk(KERN_INFO "Arquivo aberto no espaço do usuário\n");
     return SUCCESS;
 }
 static int device_release(struct inode *inode, struct file *file) {
+    printk(KERN_INFO "Arquivo fechado\n");
     return 0;
 }
 
