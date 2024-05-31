@@ -2,19 +2,31 @@
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/interrupt.h>
+#include <linux/fs.h>
 #include <asm/io.h>
+#include <linux/cdev.h>
 #include "./address_map_arm.h"
 
+// https://www.youtube.com/watch?v=oX9ZwMQL2f4&ab_channel=FastbitEmbeddedBrainAcademy
 
-// Module metadata
-MODULE_AUTHOR("TEC499-TP02-G02");
-MODULE_DESCRIPTION("Módulo pro processador gráfico");
-MODULE_LICENSE("GPL");
+// tamanho maximo do dado que vai ser enviado pra ca (64bit??)
+#define MAX_SIZE 64
+// nao sei oq é
+#define BASE_MINOR 0
+// qtd de devices, deve ser 1
+#define DEVICE_COUNT 1
+// nome graphic processor
+#define DEVICE_NAME "GP"
+
 
 void * LW_virtual; // Lightweight bridge base address
 volatile int* data_a_ptr;
 volatile int* data_b_ptr;
 volatile int* start_ptr;
+
+static char msg[MAX_SIZE]; // array pra guardar a msg que vai chegar
+static dev_t device_number = 0;
+static struct cdev cdev;
 
 static struct file_operations fops = {
     .owner = THIS_MODULE,
@@ -25,6 +37,14 @@ static struct file_operations fops = {
 };
 
 static void __init iniciar (void) {
+    
+    //implementar tratamento de erro dps
+    // add um valor dinamico pro device_number
+    alloc_chrdev_region(&device_number, BASE_MINOR, DEVICE_COUNT, DEVICE_NAME);
+    cdev_init(&cdev, &fops);
+    cdev.owner = THIS_MODULE;
+    
+    cdev_add(&cdev, &device_number, BASE_MINOR);
     // generate a virtual address for the FPGA lightweight bridge
     LW_virtual = ioremap_nocache (LW_BRIDGE_BASE, LW_BRIDGE_SPAN);
 
@@ -39,6 +59,7 @@ static void __exit parar(void) {
 }
 
 // funçoes pro driver de dispositivo de caracteres
+// chamada qdo algum processo abre o arquivo
 static int device_open(struct inode *inode, struct file *file) {
     return SUCCESS;
 }
@@ -57,6 +78,13 @@ static int set_background_color(int R, int G, int B) {
     *data_b_ptr = (R << 2) | (G << 4) | B; // cor rosa
     return 1;
 }
+
+
+
+// Module metadata
+MODULE_AUTHOR("TEC499-TP02-G02");
+MODULE_DESCRIPTION("Módulo pro processador gráfico");
+MODULE_LICENSE("GPL");
 
 
 
