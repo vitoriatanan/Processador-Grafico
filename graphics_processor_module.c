@@ -64,6 +64,7 @@ static void __init iniciar (void) {
 
 static void __exit parar(void) {
     iounmap (LW_virtual);
+	//unregisterchardevregion(device_number, devicecount)
 }
 
 // funçoes pro driver de dispositivo de caracteres
