@@ -1,7 +1,16 @@
-obj-m += graphics_processor_lib.o
+# Nome do módulo
+obj-m += graphics_processor_module.o
 
+# Diretório do kernel
+KDIR := /lib/modules/$(shell uname -r)/build
+
+# Diretório do código-fonte atual
+PWD := $(shell pwd)
+
+# Alvo principal (default)
 all:
-    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
+# Limpeza dos arquivos gerados pela compilação
 clean:
-    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	$(MAKE) -C $(KDIR) M=$(PWD) clean

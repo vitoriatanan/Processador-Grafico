@@ -86,11 +86,13 @@ static int device_release(struct inode *inode, struct file *file) {
 }
 
 static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_t *offset) {
-	copy_to_user(buffer, msg, MAX_SIZE);
+	copy_to_user(buffer, msg, length);
 }
 
 static ssize_t device_write(struct file *filp, const char *buffer, size_t length, loff_t *offset) {
+
 	copy_from_user(msg, buffer, length);
+    printk(KERN_INFO "mensagem escrita: %s", msg);
 	//sscanf();
 }
 
