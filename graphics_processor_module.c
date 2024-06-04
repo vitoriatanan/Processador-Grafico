@@ -31,6 +31,15 @@ static char msg[MAX_SIZE]; // array pra guardar a msg que vai chegar
 static dev_t device_number = 0;
 static struct cdev cdev;
 static struct class *class = NULL;
+unint8_t *kernelbuf;
+
+
+static int __init iniciar (void);
+static void __exit parar(void);
+static int device_open(struct inode *inode, struct file *filp);
+static int device_release(struct inode *inode, struct file *filp);
+static ssize_t device_read(struct file *filp, char __user *buf, size_t len, loff_t *off);
+static ssize_t device_write(struct file *filp, const char __user *buf, size_t len, loff_t *off);
 
 static struct file_operations fops = {
     .owner = THIS_MODULE,
@@ -40,16 +49,26 @@ static struct file_operations fops = {
     .release = device_release,
 };
 
-static void __init iniciar (void) {
+
+static int __init iniciar (void) {
+    int err = 0;
     
     //implementar tratamento de erro dps
     // add um valor dinamico pro device_number
-    alloc_chrdev_region(&device_number, BASE_MINOR, DEVICE_COUNT, DEVICE_NAME);
+    if ((err =  alloc_chrdev_region(&device_number, BASE_MINOR, DEVICE_COUNT, DEVICE_NAME)) < 0) {
+		printk (KERN_ERR "video: alloc_chrdev_region() failed with return value %d\n", err);
+		return err;
+	}
+
     cdev_init(&cdev, &fops);
     cdev.owner = THIS_MODULE;
-    
-    cdev_add(&cdev, &device_number, BASE_MINOR);
-    class = class_create (THIS_MODULE, DEVICE_NAME);
+
+    if ((err = cdev_add(&cdev, device_number, BASE_MINOR)) < 0) {
+		printk (KERN_ERR "video: cdev_add() failed with return value %d\n", err);
+		return err;
+	}
+
+    class = class_create (DEVICE_NAME); // ou class = class_create (THIS_MODULE, DEVICE_NAME);
 	device_create (class, NULL, device_number, NULL, DEVICE_NAME);
     
     // generate a virtual address for the FPGA lightweight bridge
@@ -61,6 +80,7 @@ static void __init iniciar (void) {
 
     printk(KERN_INFO "Driver carregado no sistema\n");
 
+    return 0;
 }
 
 static void __exit parar(void) {
@@ -71,14 +91,15 @@ static void __exit parar(void) {
     iounmap (LW_virtual);
 
     printk(KERN_INFO "Driver removido do sistema\n");
-		
+	
 }
 
 // funçoes pro driver de dispositivo de caracteres
 // chamada qdo algum processo abre o arquivo
 static int device_open(struct inode *inode, struct file *file) {
+
     printk(KERN_INFO "Arquivo aberto no espaço do usuário\n");
-    return SUCCESS;
+    return 1;
 }
 static int device_release(struct inode *inode, struct file *file) {
     printk(KERN_INFO "Arquivo fechado\n");
@@ -86,13 +107,19 @@ static int device_release(struct inode *inode, struct file *file) {
 }
 
 static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_t *offset) {
-	copy_to_user(buffer, msg, length);
+	if(copy_to_user(buffer, msg, length) != 0) {
+        printk (KERN_ERR "Error: copy_to_user unsuccessful");
+    }
+    return length;
 }
 
 static ssize_t device_write(struct file *filp, const char *buffer, size_t length, loff_t *offset) {
 
-	copy_from_user(msg, buffer, length);
+    if (copy_from_user(msg, buffer, length) != 0){
+		printk (KERN_ERR "Error: copy_from_user unsuccessful");
+    }
     printk(KERN_INFO "mensagem escrita: %s", msg);
+    return length;
 	//sscanf();
 }
 
