@@ -46,6 +46,13 @@ int set_background_block (int column, int line, int R, int G, int B, volatile in
     return 1;
 }
 
+int dp (int forma, int R, int G, int B, int tamanho, int x, int y, volatile int* data_a, volatile int* data_b, volatile int* wrreg) {
+    *data_a = (0b0) | 0b0011;
+    *data_b = (forma << 31) | (B << 28) | (G << 25) | (R << 22) | (tamanho << 18) | (y << 9) | x;
+    escrita_buffer(wrreg);
+    return 1;
+}
+
 int main() {
     volatile int* data_a_ptr;
     volatile int* data_b_ptr;
@@ -73,14 +80,17 @@ int main() {
 
 
     //cor DarkMagenta
-    set_background_color (139, 0, 139, data_a_ptr, data_b_ptr, wrreg_ptr);
+    set_background_color (255, 20, 147, data_a_ptr, data_b_ptr, wrreg_ptr);
     
     //sprite coração
-    set_sprite (1, 320, 445, 15, 1, data_a_ptr, data_b_ptr, wrreg_ptr);
+    set_sprite (1, 320, 445, 9, 1, data_a_ptr, data_b_ptr, wrreg_ptr);
 
     //edita um bloco para laranja
-    set_background_block (5, 3, 255, 140, 0, data_a_ptr, data_b_ptr, wrreg_ptr);
+    set_background_block (5, 3, 255, 0, 0, data_a_ptr, data_b_ptr, wrreg_ptr);
 
+    dp (1, 0, 255, 0, 15, 500, 260, data_a_ptr, data_b_ptr, wrreg_ptr);
+
+    //0, 255, 255 ceu azul
     
 
     if (munmap (LW_virtual, LW_BRIDGE_SPAN) != 0) {
