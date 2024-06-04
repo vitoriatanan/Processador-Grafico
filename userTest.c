@@ -5,7 +5,7 @@
 #include <string.h>
 #include <errno.h>
 
-int8_t write_buf[64] = {"r: 1, g: 2, b: 3"}; // cada char tem 8 bits
+char write_buf[64] = {"r: 1, g: 2, b: 3"}; // cada char tem 8 bits
 
 
 int main() {
@@ -15,7 +15,11 @@ int main() {
         return -1;
     }
 
-    write(fd, write_buf, strlen(write_buf)+1);
+   // write(fd, write_buf, strlen(write_buf));
+
+    int bytesWritten = write(fd, write_buf, strlen(write_buf));
+
+    printf("%d bytes written successfully!\n", bytesWritten);
 
     close(fd);
     return 0;
