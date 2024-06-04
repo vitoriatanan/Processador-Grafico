@@ -10,6 +10,8 @@
 
 // https://www.youtube.com/watch?v=oX9ZwMQL2f4&ab_channel=FastbitEmbeddedBrainAcademy
 // https://www.youtube.com/watch?v=DwwZR0EE_1A&list=PLlrqp8hxLfoqSIQFrGbAM5lv5uAnZBB61&index=2&ab_channel=TechoGenius
+// sudo /home/root/Problemas/2024-1/CoLendaInFPGA.sh botar gpu na placa
+
 
 // tamanho maximo do dado que vai ser enviado pra ca (64bit??)
 #define MAX_SIZE 64
@@ -99,7 +101,7 @@ static void __exit parar(void) {
 static int device_open(struct inode *inode, struct file *file) {
 
     printk(KERN_INFO "Arquivo aberto no espaço do usuário\n");
-    return 1;
+    return 0;
 }
 static int device_release(struct inode *inode, struct file *file) {
     printk(KERN_INFO "Arquivo fechado\n");
