@@ -14,7 +14,7 @@
 // tamanho maximo do dado que vai ser enviado pra ca (64bit??)
 #define MAX_SIZE 64
 // nao sei oq é
-#define BASE_MINOR 0
+#define BASE_MINOR 71
 // qtd de devices, deve ser 1
 #define DEVICE_COUNT 1
 // nome graphic processor
