@@ -26,14 +26,13 @@
 void * LW_virtual; // Lightweight bridge base address
 volatile int* data_a_ptr;
 volatile int* data_b_ptr;
-volatile int* start_ptr;
+volatile int* wrreg_ptr;
 
 static char msg[MAX_SIZE]; // array pra guardar a msg que vai chegar
 // variaveis necessarias pro modulo
 static dev_t device_number = 0;
 static struct cdev cdev;
 static struct class *class = NULL;
-//unint8_t *kernelbuf;
 
 
 static int __init iniciar (void);
@@ -42,6 +41,7 @@ static int device_open(struct inode *inode, struct file *filp);
 static int device_release(struct inode *inode, struct file *filp);
 static ssize_t device_read(struct file *filp, char __user *buf, size_t len, loff_t *off);
 static ssize_t device_write(struct file *filp, const char __user *buf, size_t len, loff_t *off);
+static void escrita_buffer(void);
 
 static struct file_operations fops = {
     .owner = THIS_MODULE,
@@ -78,7 +78,7 @@ static int __init iniciar (void) {
 
     // data_a_ptr = (int *) (LW_virtual + DATA_A_BASE);
     // data_b_ptr = (int *) (LW_virtual + DATA_B_BASE);
-    // start_ptr = (int *) (LW_virtual + START_BASE);
+    // wrreg_ptr = (int *) (LW_virtual + WRREG_BASE);
 
     printk(KERN_INFO "Driver carregado no sistema\n");
 
@@ -121,17 +121,39 @@ static ssize_t device_write(struct file *filp, const char *buffer, size_t length
     if (copy_from_user(msg, buffer, length) != 0){
 		printk (KERN_ERR "Error: copy_from_user unsuccessful");
     }
-    printk(KERN_INFO "mensagem escrita: %s", msg);
+
+    int r, g, b;
+    
+    // teste - o que ta em msg passa pras outras variaveis
+    sscanf(msg, "%d %d %d", &r, &g, &b);
+    printk(KERN_INFO "valores rgb inteiros: %d %d %d", r, g, b);
+    set_background_color(r, g, b);
     return length;
 	//sscanf();
 }
 
-static int set_background_color(int R, int G, int B) {
-    *data_a_ptr = (0x0000 | 0x00000); //opcode para WBR e endereço do registrador
-    *data_b_ptr = (R << 2) | (G << 4) | B; // cor rosa
+static void escrita_buffer(void) {
+    *wrreg_ptr = 1;
+    *wrreg_ptr = 0;
+}
+
+//define cor do background
+static int set_background_color (int R, int G, int B) {
+    *data_a_ptr = 0x0000; //opcode para WBR e endereço do registrador
+    *data_b_ptr = (B << 6) | (G << 4) | R;
+    
+    escrita_buffer();
     return 1;
 }
 
+//seta um sprite
+static int set_sprite (int registrador, int x, int y, int offset, int activation_bit) {
+    *data_a_ptr = (registrador << 4) | 0x0000;
+    *data_b_ptr = (activation_bit << 29) | (x << 19) | (y << 9) | offset;
+    
+    escrita_buffer();
+    return 1;
+}
 
 
 // Module metadata
