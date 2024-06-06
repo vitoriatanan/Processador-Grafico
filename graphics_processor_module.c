@@ -58,7 +58,7 @@ static int __init iniciar (void) {
     //implementar tratamento de erro dps
     // add um valor dinamico pro device_number
     if ((err =  alloc_chrdev_region(&device_number, BASE_MINOR, DEVICE_COUNT, DEVICE_NAME)) < 0) {
-		printk (KERN_ERR "video: alloc_chrdev_region() failed with return value %d\n", err);
+		printk (KERN_ERR "alloc_chrdev_region() falhou, erro %d\n", err);
 		return err;
 	}
 
@@ -66,19 +66,19 @@ static int __init iniciar (void) {
     cdev.owner = THIS_MODULE;
 
     if ((err = cdev_add(&cdev, device_number, BASE_MINOR)) < 0) {
-		printk (KERN_ERR "video: cdev_add() failed with return value %d\n", err);
+		printk (KERN_ERR "cdev_add() falhou, erro: %d\n", err);
 		return err;
 	}
 
-    class = class_create (DEVICE_NAME); // ou class = class_create (THIS_MODULE, DEVICE_NAME);
+    class = class_create (THIS_MODULE, DEVICE_NAME); // ou class = class_create (THIS_MODULE, DEVICE_NAME);
 	device_create (class, NULL, device_number, NULL, DEVICE_NAME);
     
     // generate a virtual address for the FPGA lightweight bridge
-    // LW_virtual = ioremap_nocache (LW_BRIDGE_BASE, LW_BRIDGE_SPAN);
+    LW_virtual = ioremap_nocache (LW_BRIDGE_BASE, LW_BRIDGE_SPAN);
 
-    // data_a_ptr = (int *) (LW_virtual + DATA_A_BASE);
-    // data_b_ptr = (int *) (LW_virtual + DATA_B_BASE);
-    // wrreg_ptr = (int *) (LW_virtual + WRREG_BASE);
+    data_a_ptr = (int *) (LW_virtual + DATA_A_BASE);
+    data_b_ptr = (int *) (LW_virtual + DATA_B_BASE);
+    wrreg_ptr = (int *) (LW_virtual + WRREG_BASE);
 
     printk(KERN_INFO "Driver carregado no sistema\n");
 
@@ -91,7 +91,7 @@ static void __exit parar(void) {
 	cdev_del(&cdev);
 	unregister_chrdev_region(device_number, DEVICE_COUNT);
     iounmap (LW_virtual);
-
+		
     printk(KERN_INFO "Driver removido do sistema\n");
 	
 }
@@ -99,7 +99,6 @@ static void __exit parar(void) {
 // funçoes pro driver de dispositivo de caracteres
 // chamada qdo algum processo abre o arquivo
 static int device_open(struct inode *inode, struct file *file) {
-
     printk(KERN_INFO "Arquivo aberto no espaço do usuário\n");
     return 0;
 }
@@ -110,7 +109,7 @@ static int device_release(struct inode *inode, struct file *file) {
 
 static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_t *offset) {
 	if(copy_to_user(buffer, msg, length) != 0) {
-        printk (KERN_ERR "Error: copy_to_user unsuccessful");
+        printk (KERN_ERR "Erro: copy_to_user falhou\n");
     }
     printk(KERN_INFO "Lendo");
     return length;
@@ -119,7 +118,7 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
 static ssize_t device_write(struct file *filp, const char *buffer, size_t length, loff_t *offset) {
 
     if (copy_from_user(msg, buffer, length) != 0){
-		printk (KERN_ERR "Error: copy_from_user unsuccessful");
+		printk (KERN_ERR "Erro: copy_from_user falhou\n");
     }
 
     int r, g, b;
