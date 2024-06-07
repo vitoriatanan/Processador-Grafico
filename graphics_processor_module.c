@@ -6,6 +6,7 @@
 #include <asm/io.h>
 #include <linux/cdev.h>
 #include <linux/device.h>
+#include <linux/uaccess.h>
 #include "./address_map_arm.h"
 
 // https://www.youtube.com/watch?v=oX9ZwMQL2f4&ab_channel=FastbitEmbeddedBrainAcademy
@@ -32,8 +33,8 @@ volatile int* data_a_ptr;
 volatile int* data_b_ptr;
 volatile int* wrreg_ptr;
 
-static char msg[MAX_SIZE]; // array pra guardar a msg que vai chegar
 // variaveis necessarias pro modulo
+static char msg[MAX_SIZE]; // array pra guardar a msg que vai chegar
 static dev_t device_number = 0;
 static struct cdev cdev;
 static struct class *class = NULL;
@@ -46,6 +47,10 @@ static int device_release(struct inode *inode, struct file *filp);
 static ssize_t device_read(struct file *filp, char __user *buf, size_t len, loff_t *off);
 static ssize_t device_write(struct file *filp, const char __user *buf, size_t len, loff_t *off);
 static void escrita_buffer(void);
+static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, int y);
+static int instruction_WBR (int R, int G, int B, int reg, int x, int y, int offset, int sp);
+static int instruction_WSM (int column, int line, int R, int G, int B);
+
 
 static struct file_operations fops = {
     .owner = THIS_MODULE,
@@ -120,34 +125,25 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
 }
 
 static ssize_t device_write(struct file *filp, const char *buffer, size_t length, loff_t *offset) {
+    char msg[MAX_SIZE]; // array pra guardar a msg que vai chegar
+
+    int instrucao = msg[0];
 
     if (copy_from_user(msg, buffer, length) != 0){
 		printk (KERN_ERR "Erro: copy_from_user falhou\n");
     }
+    printk(KERN_INFO "instruçao %d\n", msg[0]);
+    printk(KERN_INFO "buffer %d, %d, %d, %d, %d, %d, %d, %d", buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], msg[6], msg[7], msg[8]);
 
-    int instrucao = msg[0];
 
     if (instrucao == WBR) {
-        int R = msg[1]; int G = msg[2]; int B = msg[3];
-        int reg = msg[4]; int x = msg[5]; int y = msg[6];
-        int offset = msg[7]; int sp = msg[8];
-        instruction_WBR(R, G, B, reg, x, y, offset, sp);
+        instruction_WBR(msg[1], msg[2], msg[3], msg[4], msg[5], msg[6], msg[7], msg[8]);
+        printk(KERN_INFO "entrou em wbr\n");
+
     } else if (instrucao == WSM) {
-        int column = msg[1];
-        int line = msg[2];
-        int R = msg[3];
-        int G = msg[4];
-        int B = msg[5];
-        instruction_WSM(column, line, R, G, B);
+        instruction_WSM(msg[1], msg[2], msg[3], msg[4], msg[5]);
     } else if (instrucao == DP) {
-        int forma = msg[1];
-        int R = msg[2];
-        int G = msg[3];
-        int B = msg[4];
-        int tamanho = msg[5];
-        int x = msg[6];
-        int y = msg[7];
-        instruction_DP(forma, R, G, B, tamanho, x, y);
+        instruction_DP(msg[1], msg[2], msg[3], msg[4], msg[5], msg[6], msg[7]);
     }
 
     // teste - o que ta em msg passa pras outras variaveis
@@ -170,6 +166,7 @@ static int instruction_WBR (int R, int G, int B, int reg, int x, int y, int offs
     *data_a_ptr = (reg << 4) | OPCODE_WBR; //opcode para WBR e endereço do registrador
     if (sp) {
         *data_b_ptr = (sp << 29) | (x << 19) | (y << 9) | offset;
+        printk (KERN_INFO "setou sprite");
     } else {
         *data_b_ptr = (B << 6) | (G << 3) | R;
     }
