@@ -21,6 +21,10 @@
 #define DEVICE_COUNT 1
 // nome graphic processor
 #define DEVICE_NAME "graphicProcessor"
+#define OPCODE_WBR 0x0000
+#define WBR 1
+#define WSM 2
+#define DP 3
 
 
 void * LW_virtual; // Lightweight bridge base address
@@ -121,12 +125,35 @@ static ssize_t device_write(struct file *filp, const char *buffer, size_t length
 		printk (KERN_ERR "Erro: copy_from_user falhou\n");
     }
 
-    int r, g, b;
-    
+    int instrucao = msg[0];
+
+    if (instrucao == WBR) {
+        int R = msg[1]; int G = msg[2]; int B = msg[3];
+        int reg = msg[4]; int x = msg[5]; int y = msg[6];
+        int offset = msg[7]; int sp = msg[8];
+        instruction_WBR(R, G, B, reg, x, y, offset, sp);
+    } else if (instrucao == WSM) {
+        int column = msg[1];
+        int line = msg[2];
+        int R = msg[3];
+        int G = msg[4];
+        int B = msg[5];
+        instruction_WSM(column, line, R, G, B);
+    } else if (instrucao == DP) {
+        int forma = msg[1];
+        int R = msg[2];
+        int G = msg[3];
+        int B = msg[4];
+        int tamanho = msg[5];
+        int x = msg[6];
+        int y = msg[7];
+        instruction_DP(forma, R, G, B, tamanho, x, y);
+    }
+
     // teste - o que ta em msg passa pras outras variaveis
-    sscanf(msg, "%d %d %d", &r, &g, &b);
-    printk(KERN_INFO "valores rgb inteiros: %d %d %d", r, g, b);
-    set_background_color(r, g, b);
+    //sscanf(msg, "%d %d %d", &r, &g, &b);
+    //printk(KERN_INFO "valores rgb inteiros: %d %d %d", r, g, b);
+    //set_background_color(r, g, b);
     return length;
 	//sscanf();
 }
@@ -136,20 +163,34 @@ static void escrita_buffer(void) {
     *wrreg_ptr = 0;
 }
 
-//define cor do background
-static int set_background_color (int R, int G, int B) {
-    *data_a_ptr = 0x0000; //opcode para WBR e endereço do registrador
-    *data_b_ptr = (B << 6) | (G << 4) | R;
+
+// background e sprite
+static int instruction_WBR (int R, int G, int B, int reg, int x, int y, int offset, int sp) {
     
+    *data_a_ptr = (reg << 4) | OPCODE_WBR; //opcode para WBR e endereço do registrador
+    if (sp) {
+        *data_b_ptr = (sp << 29) | (x << 19) | (y << 9) | offset;
+    } else {
+        *data_b_ptr = (B << 6) | (G << 3) | R;
+    }
     escrita_buffer();
     return 1;
 }
 
-//seta um sprite
-static int set_sprite (int registrador, int x, int y, int offset, int activation_bit) {
-    *data_a_ptr = (registrador << 4) | 0x0000;
-    *data_b_ptr = (activation_bit << 29) | (x << 19) | (y << 9) | offset;
-    
+static int instruction_WSM (int column, int line, int R, int G, int B) {
+    //Calcula o endereço de memória do bloco com base na coluna e linha
+    int endereco_memoria = (line * 80 + column); // 80: numero de colunas por linha = 245
+
+    *data_a_ptr = (endereco_memoria << 4) | 0b0010;
+    *data_b_ptr = (B << 6) | (G << 4) | R;
+
+    escrita_buffer();
+    return 1;
+}
+
+static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, int y) {
+    *data_a_ptr = (0b0) | 0b0011;
+    *data_b_ptr = (forma << 31) | (B << 28) | (G << 25) | (R << 22) | (tamanho << 18) | (y << 9) | x;
     escrita_buffer();
     return 1;
 }
