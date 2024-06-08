@@ -18,7 +18,9 @@ int main() {
 
     //int bytesWritten = write(fd, write_buf, strlen(write_buf));
 
-    int bytesWritten = set_background_color(1, 2, 3);
+    //int bytesWritten = set_background_color(1, 2, 3);
+    int bytesWritten = set_sprite (1, 320, 445, 9, 1);
+    //int bytesWritten = set_background_block(5, 3, 255, 0, 0);
     printf("%d bytes written successfully!\n", bytesWritten);
 
     return 0;
@@ -32,8 +34,8 @@ int set_background_color(int R, int G, int B) {
         return -1;
     }
 
-    char buffer[10] = {WBR, R, G, B, 0x0000, 0, 0, 0, 0};
-    int bytesWritten = write(fd, buffer, strlen(buffer));
+    unsigned char buffer[9] = {WBR, R, G, B, 0x0000, 0, 0, 0, 0};
+    int bytesWritten = write(fd, buffer, sizeof(buffer));
 
     close(fd);
     return bytesWritten;
@@ -46,9 +48,8 @@ int set_sprite(int reg, int x, int y, int offset, int activation_bit) {
         return -1;
     }
 
-    char buffer[10] = {WBR, 0, 0, 0, reg, x, y, offset, activation_bit};
-    int bytesWritten = write(fd, buffer, strlen(buffer));
-
+    unsigned char buffer[10] = {WBR, 0, 0, 0, reg, x, y, offset, activation_bit};
+    int bytesWritten = write(fd, buffer, sizeof(buffer));
     close(fd);
     return bytesWritten;
 
@@ -61,8 +62,8 @@ int set_background_block(int column, int line, int R, int G, int B) {
         return -1;
     }
 
-    char buffer[10] = {WSM, column, line, R, G, B};
-    int bytesWritten = write(fd, buffer, strlen(buffer));
+    unsigned char buffer[6] = {WSM, column, line, R, G, B};
+    int bytesWritten = write(fd, buffer, sizeof(buffer));
 
     close(fd);
     return bytesWritten;
@@ -75,8 +76,8 @@ int define_poligon(int forma, int R, int G, int B, int tamanho, int x, int y) {
         return -1;
     }
 
-    char buffer[10] = {DP, forma, R, G, B, tamanho, x, y};
-    int bytesWritten = write(fd, buffer, strlen(buffer));
+    unsigned char buffer[8] = {DP, forma, R, G, B, tamanho, x, y};
+    int bytesWritten = write(fd, buffer, sizeof(buffer));
 
     close(fd);
     return bytesWritten;
