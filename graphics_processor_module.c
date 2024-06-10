@@ -15,7 +15,7 @@
 
 
 // tamanho maximo do dado que vai ser enviado pra ca (64bit??)
-#define MAX_SIZE 64
+#define MAX_SIZE 32
 // nao sei oq é
 #define BASE_MINOR 71
 // qtd de devices, deve ser 1
@@ -79,15 +79,15 @@ static int __init iniciar (void) {
 		return err;
 	}
 
-    class = class_create (THIS_MODULE, DEVICE_NAME); // ou class = class_create (THIS_MODULE, DEVICE_NAME);
+    class = class_create (DEVICE_NAME); // ou class = class_create (THIS_MODULE, DEVICE_NAME);
 	device_create (class, NULL, device_number, NULL, DEVICE_NAME);
     
     // generate a virtual address for the FPGA lightweight bridge
-    LW_virtual = ioremap_nocache (LW_BRIDGE_BASE, LW_BRIDGE_SPAN);
+    // LW_virtual = ioremap_nocache (LW_BRIDGE_BASE, LW_BRIDGE_SPAN);
 
-    data_a_ptr = (int *) (LW_virtual + DATA_A_BASE);
-    data_b_ptr = (int *) (LW_virtual + DATA_B_BASE);
-    wrreg_ptr = (int *) (LW_virtual + WRREG_BASE);
+    // data_a_ptr = (int *) (LW_virtual + DATA_A_BASE);
+    // data_b_ptr = (int *) (LW_virtual + DATA_B_BASE);
+    // wrreg_ptr = (int *) (LW_virtual + WRREG_BASE);
 
     printk(KERN_INFO "Driver carregado no sistema\n");
 
@@ -125,33 +125,29 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
 }
 
 static ssize_t device_write(struct file *filp, const char *buffer, size_t length, loff_t *offset) {
-    char msg[MAX_SIZE]; // array pra guardar a msg que vai chegar
-
-    int instrucao = msg[0];
-
+   
+    int values[MAX_SIZE];
+    
     if (copy_from_user(msg, buffer, length) != 0){
 		printk (KERN_ERR "Erro: copy_from_user falhou\n");
     }
-    printk(KERN_INFO "instruçao %d\n", msg[0]);
-    printk(KERN_INFO "buffer %d, %d, %d, %d, %d, %d, %d, %d", buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], msg[6], msg[7], msg[8]);
 
+    sscanf(msg, "%d", &values[0]);
+    int instruction = values[0];
 
-    if (instrucao == WBR) {
-        instruction_WBR(msg[1], msg[2], msg[3], msg[4], msg[5], msg[6], msg[7], msg[8]);
+    if (instruction == WBR) {
+        sscanf(msg, "%d %d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6], &values[7], &values[8]);
         printk(KERN_INFO "entrou em wbr\n");
-
-    } else if (instrucao == WSM) {
-        instruction_WSM(msg[1], msg[2], msg[3], msg[4], msg[5]);
-    } else if (instrucao == DP) {
-        instruction_DP(msg[1], msg[2], msg[3], msg[4], msg[5], msg[6], msg[7]);
+        //instruction_WBR(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
+    } else if (instruction == WSM) {
+        sscanf(msg, "%d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4]);
+        //instruction_WSM(values[1], values[2], values[3], values[4], values[5]);
+    } else if (instruction == DP) {
+        sscanf(msg, "%d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6]);
+       // instruction_DP(values[1], values[2], values[3], values[4], values[5], values[6]);
     }
 
-    // teste - o que ta em msg passa pras outras variaveis
-    //sscanf(msg, "%d %d %d", &r, &g, &b);
-    //printk(KERN_INFO "valores rgb inteiros: %d %d %d", r, g, b);
-    //set_background_color(r, g, b);
     return length;
-	//sscanf();
 }
 
 static void escrita_buffer(void) {
