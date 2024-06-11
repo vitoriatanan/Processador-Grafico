@@ -138,13 +138,13 @@ static ssize_t device_write(struct file *filp, const char *buffer, size_t length
     if (instruction == WBR) {
         sscanf(msg, "%d %d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6], &values[7], &values[8]);
         printk(KERN_INFO "entrou em wbr\n");
-        //instruction_WBR(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
+        instruction_WBR(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
     } else if (instruction == WSM) {
-        sscanf(msg, "%d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4]);
-        //instruction_WSM(values[1], values[2], values[3], values[4], values[5]);
+        sscanf(msg, "%d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5]);
+        instruction_WSM(values[1], values[2], values[3], values[4], values[5]);
     } else if (instruction == DP) {
-        sscanf(msg, "%d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6]);
-       // instruction_DP(values[1], values[2], values[3], values[4], values[5], values[6]);
+        sscanf(msg, "%d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6], &values[7]);
+       	instruction_DP(values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
     }
 
     return length;
