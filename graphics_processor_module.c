@@ -79,15 +79,15 @@ static int __init iniciar (void) {
 		return err;
 	}
 
-    class = class_create (DEVICE_NAME); // ou class = class_create (THIS_MODULE, DEVICE_NAME);
+    class = class_create (THIS_MODULE, DEVICE_NAME); // ou class = class_create (THIS_MODULE, DEVICE_NAME);
 	device_create (class, NULL, device_number, NULL, DEVICE_NAME);
     
     // generate a virtual address for the FPGA lightweight bridge
-    // LW_virtual = ioremap_nocache (LW_BRIDGE_BASE, LW_BRIDGE_SPAN);
+    LW_virtual = ioremap_nocache (LW_BRIDGE_BASE, LW_BRIDGE_SPAN);
 
-    // data_a_ptr = (int *) (LW_virtual + DATA_A_BASE);
-    // data_b_ptr = (int *) (LW_virtual + DATA_B_BASE);
-    // wrreg_ptr = (int *) (LW_virtual + WRREG_BASE);
+    data_a_ptr = (int *) (LW_virtual + DATA_A_BASE);
+    data_b_ptr = (int *) (LW_virtual + DATA_B_BASE);
+    wrreg_ptr = (int *) (LW_virtual + WRREG_BASE);
 
     printk(KERN_INFO "Driver carregado no sistema\n");
 
