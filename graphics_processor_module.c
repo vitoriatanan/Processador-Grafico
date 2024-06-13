@@ -23,8 +23,10 @@
 // nome graphic processor
 #define DEVICE_NAME "graphicProcessor"
 #define OPCODE_WBR 0x0000
+#define OPCODE_WBM 0b0010
+#define OPCODE_DP 0b0011
 #define WBR 1
-#define WSM 2
+#define WBM 2
 #define DP 3
 
 
@@ -127,19 +129,20 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
 static ssize_t device_write(struct file *filp, const char *buffer, size_t length, loff_t *offset) {
    
     int values[MAX_SIZE];
+	int instruction = 0;
     
     if (copy_from_user(msg, buffer, length) != 0){
 		printk (KERN_ERR "Erro: copy_from_user falhou\n");
     }
 
     sscanf(msg, "%d", &values[0]);
-    int instruction = values[0];
+    instruction = values[0];
 
     if (instruction == WBR) {
         sscanf(msg, "%d %d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6], &values[7], &values[8]);
         printk(KERN_INFO "entrou em wbr\n");
         instruction_WBR(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
-    } else if (instruction == WSM) {
+    } else if (instruction == WBM) {
         sscanf(msg, "%d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5]);
         instruction_WSM(values[1], values[2], values[3], values[4], values[5]);
     } else if (instruction == DP) {
@@ -170,11 +173,11 @@ static int instruction_WBR (int R, int G, int B, int reg, int x, int y, int offs
     return 1;
 }
 
-static int instruction_WSM (int column, int line, int R, int G, int B) {
+static int instruction_WBM (int column, int line, int R, int G, int B) {
     //Calcula o endereço de memória do bloco com base na coluna e linha
     int endereco_memoria = (line * 80 + column); // 80: numero de colunas por linha = 245
 
-    *data_a_ptr = (endereco_memoria << 4) | 0b0010;
+    *data_a_ptr = (endereco_memoria << 4) | OPCODE_WBM;
     *data_b_ptr = (B << 6) | (G << 4) | R;
 
     escrita_buffer();
@@ -182,7 +185,7 @@ static int instruction_WSM (int column, int line, int R, int G, int B) {
 }
 
 static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, int y) {
-    *data_a_ptr = (0b0) | 0b0011;
+    *data_a_ptr = (0b0) | OPCODE_DP;
     *data_b_ptr = (forma << 31) | (B << 28) | (G << 25) | (R << 22) | (tamanho << 18) | (y << 9) | x;
     escrita_buffer();
     return 1;
