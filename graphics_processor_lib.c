@@ -15,10 +15,10 @@ int set_background_color(int R, int G, int B);
 int set_sprite(int reg, int x, int y, int offset, int activation_bit);
 int set_background_block(int column, int line, int R, int G, int B);
 int define_poligon(int forma, int R, int G, int B, int tamanho, int x, int y);
+int write_sprite_mem (int R, int G, int B, int endereco_memoria);
 
 
 int main() {
-
 
     //int bytesWritten = set_background_color(100, 245, 345);
     int bytesWritten = set_sprite (1, 320, 445, 9, 1);
@@ -91,4 +91,8 @@ int define_poligon(int forma, int R, int G, int B, int tamanho, int x, int y) {
 
     close(fd);
     return bytesWritten;
+}
+
+int write_sprite_mem(int R, int G, int B, int endereco_memoria) {
+    
 }
