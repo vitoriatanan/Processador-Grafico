@@ -6,7 +6,7 @@
 #include <errno.h>
 
 #define WBR 1
-#define WSM 2
+#define WBM 2
 #define DP 3
 
 // prototipos
@@ -69,7 +69,7 @@ int set_background_block(int column, int line, int R, int G, int B) {
         return -1;
     }
 
-    sprintf(buffer, "%d %d %d %d %d %d", WSM, column, line, R, G, B);
+    sprintf(buffer, "%d %d %d %d %d %d", WBM, column, line, R, G, B);
     int bytesWritten = write(fd, buffer, strlen(buffer));
 
     close(fd);
