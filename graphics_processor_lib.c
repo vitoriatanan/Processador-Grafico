@@ -8,6 +8,7 @@
 #define WBR 1
 #define WBM 2
 #define DP 3
+#define MAX_SIZE 32
 
 // prototipos
 int set_background_color(int R, int G, int B);
@@ -22,7 +23,7 @@ int main() {
     //int bytesWritten = set_background_color(100, 245, 345);
     int bytesWritten = set_sprite (1, 320, 445, 9, 1);
     //int bytesWritten = set_background_block(5, 3, 255, 0, 0);
-    printf("%d bytes written successfully!\n", bytesWritten);
+    printf("%d bytes escritos\n", bytesWritten);
 
     return 0;
 
@@ -30,7 +31,7 @@ int main() {
 
 int set_background_color(int R, int G, int B) {
     int fd;
-    unsigned char buffer[23];
+    unsigned char buffer[MAX_SIZE];
     if ((fd = open("/dev/graphicProcessor", O_RDWR)) == -1){
         printf("Error opening /dev/graphicProcessor: %s\n", strerror(errno));
         return -1;
@@ -45,7 +46,7 @@ int set_background_color(int R, int G, int B) {
 
 int set_sprite(int reg, int x, int y, int offset, int activation_bit) {
     int fd;
-    unsigned char buffer[30];
+    unsigned char buffer[MAX_SIZE];
     
     if ((fd = open("/dev/graphicProcessor", O_RDWR)) == -1){
         printf("Error opening /dev/graphicProcessor: %s\n", strerror(errno));
@@ -62,7 +63,7 @@ int set_sprite(int reg, int x, int y, int offset, int activation_bit) {
 
 int set_background_block(int column, int line, int R, int G, int B) {
     int fd;
-    unsigned char buffer[20];
+    unsigned char buffer[MAX_SIZE];
 
     if ((fd = open("/dev/graphicProcessor", O_RDWR)) == -1){
         printf("Error opening /dev/graphicProcessor: %s\n", strerror(errno));
@@ -78,7 +79,7 @@ int set_background_block(int column, int line, int R, int G, int B) {
 
 int define_poligon(int forma, int R, int G, int B, int tamanho, int x, int y) {
     int fd;
-    unsigned char buffer[20];
+    unsigned char buffer[MAX_SIZE];
 
     if ((fd = open("/dev/graphicProcessor", O_RDWR)) == -1){
         printf("Error opening /dev/graphicProcessor: %s\n", strerror(errno));
