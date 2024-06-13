@@ -147,8 +147,8 @@ static ssize_t device_write(struct file *filp, const char *buffer, size_t length
         sscanf(msg, "%d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5]);
         instruction_WSM(values[1], values[2], values[3], values[4], values[5]);
     } else if (instruction == DP) {
-        sscanf(msg, "%d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6], &values[7]);
-       	instruction_DP(values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+        sscanf(msg, "%d %d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6], &values[7], values[8]);
+       	instruction_DP(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
     }
 
     return length;
@@ -192,7 +192,7 @@ static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, in
     return 1;
 }
 
-static int instruction_WSM (int R, int G, int B, endereco_memoria) {
+static int instruction_WSM (int R, int G, int B, int endereco_memoria) {
 	*data_a_ptr = (endereco_memoria << 4) | OPCODE_WSM;
     *data_b_ptr = (B << 6) | (G << 4) | R;
 
