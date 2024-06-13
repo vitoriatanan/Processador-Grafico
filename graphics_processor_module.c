@@ -25,7 +25,7 @@
 #define OPCODE_WBR 0b0000
 #define OPCODE_WBM 0b0010
 #define OPCODE_DP 0b0011
-#define OPCODE_WSM 0001
+#define OPCODE_WSM 0b0001
 #define WBR 1
 #define WBM 2
 #define DP 3
@@ -54,7 +54,7 @@ static void escrita_buffer(void);
 static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, int y, int endereco);
 static int instruction_WBR (int R, int G, int B, int reg, int x, int y, int offset, int sp);
 static int instruction_WBM (int column, int line, int R, int G, int B);
-static int instruction_WSM (int R, int G, int B, endereco_memoria)
+static int instruction_WSM (int R, int G, int B, endereco_memoria);
 
 static struct file_operations fops = {
     .owner = THIS_MODULE,
