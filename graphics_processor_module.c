@@ -29,6 +29,7 @@
 #define WBR 1
 #define WBM 2
 #define DP 3
+#define WSM 4
 
 
 void * LW_virtual; // Lightweight bridge base address
@@ -149,6 +150,9 @@ static ssize_t device_write(struct file *filp, const char *buffer, size_t length
     } else if (instruction == DP) {
         sscanf(msg, "%d %d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6], &values[7], values[8]);
        	instruction_DP(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
+    } else if (instruction == WSM) {
+	sscanf(msg, "%d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4]);
+        instruction_WSM(values[1], values[2], values[3], values[4]);
     }
 
     return length;
