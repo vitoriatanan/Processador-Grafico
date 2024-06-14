@@ -30,6 +30,7 @@
 #define WBM 2
 #define DP 3
 #define WSM 4
+#define CLR 5
 
 
 void * LW_virtual; // Lightweight bridge base address
@@ -55,6 +56,7 @@ static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, in
 static int instruction_WBR (int R, int G, int B, int reg, int x, int y, int offset, int sp);
 static int instruction_WBM (int column, int line, int R, int G, int B);
 static int instruction_WSM (int R, int G, int B, endereco_memoria);
+static void clear_screen (void);
 
 static struct file_operations fops = {
     .owner = THIS_MODULE,
@@ -146,13 +148,15 @@ static ssize_t device_write(struct file *filp, const char *buffer, size_t length
         instruction_WBR(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
     } else if (instruction == WBM) {
         sscanf(msg, "%d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5]);
-        instruction_WSM(values[1], values[2], values[3], values[4], values[5]);
+        instruction_WBM(values[1], values[2], values[3], values[4], values[5]);
     } else if (instruction == DP) {
         sscanf(msg, "%d %d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6], &values[7], values[8]);
        	instruction_DP(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
     } else if (instruction == WSM) {
 	sscanf(msg, "%d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4]);
         instruction_WSM(values[1], values[2], values[3], values[4]);
+    } else if (instruction == CLR) {
+	    clear_screen();
     }
 
     return length;
@@ -197,11 +201,22 @@ static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, in
 }
 
 static int instruction_WSM (int R, int G, int B, int endereco_memoria) {
-	*data_a_ptr = (endereco_memoria << 4) | OPCODE_WSM;
+    *data_a_ptr = (endereco_memoria << 4) | OPCODE_WSM;
     *data_b_ptr = (B << 6) | (G << 4) | R;
 
     escrita_buffer();
     return 1;
+}
+
+//Limpa a tela do monitor (640 x 480)
+static int clear_screen (void) {
+	int i, j;
+	for (i = 0; i < 480; i++) {
+		for (j = 0; j < 640; j++) {
+			instruction_WBM(j, i, 0, 0, 0);	// Define o pixel na posição (j, i) para a cor preta (RGB = 0, 0, 0)
+		}
+	}
+	return 1;
 }
 
 
