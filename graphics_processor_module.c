@@ -30,13 +30,14 @@
 #define WBM 2
 #define DP 3
 #define WSM 4
-#define CLR 5
+//#define CLR 5
 
 
 void * LW_virtual; // Lightweight bridge base address
 volatile int* data_a_ptr;
 volatile int* data_b_ptr;
 volatile int* wrreg_ptr;
+volatile int* wrfull_ptr;
 
 // variaveis necessarias pro modulo
 static char msg[MAX_SIZE]; // array pra guardar a msg que vai chegar
@@ -54,9 +55,9 @@ static ssize_t device_write(struct file *filp, const char __user *buf, size_t le
 static void escrita_buffer(void);
 static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, int y, int endereco);
 static int instruction_WBR (int R, int G, int B, int reg, int x, int y, int offset, int sp);
-static int instruction_WBM (int column, int line, int R, int G, int B);
-static int instruction_WSM (int R, int G, int B, endereco_memoria);
-static void clear_screen (void);
+static int instruction_WBM (int endereco_memoria, int R, int G, int B);
+static int instruction_WSM (int R, int G, int B, int endereco_memoria);
+//static void clear_screen (void);
 
 static struct file_operations fops = {
     .owner = THIS_MODULE,
@@ -94,6 +95,7 @@ static int __init iniciar (void) {
     data_a_ptr = (int *) (LW_virtual + DATA_A_BASE);
     data_b_ptr = (int *) (LW_virtual + DATA_B_BASE);
     wrreg_ptr = (int *) (LW_virtual + WRREG_BASE);
+    wrfull_ptr = (int *) (LW_virtual + WRFULL);
 
     printk(KERN_INFO "Driver carregado no sistema\n");
 
@@ -135,6 +137,8 @@ static ssize_t device_write(struct file *filp, const char *buffer, size_t length
     int values[MAX_SIZE];
 	int instruction = 0;
     
+    while (*wrfull_ptr) {}
+    
     if (copy_from_user(msg, buffer, length) != 0){
 		printk (KERN_ERR "Erro: copy_from_user falhou\n");
     }
@@ -147,16 +151,14 @@ static ssize_t device_write(struct file *filp, const char *buffer, size_t length
         printk(KERN_INFO "entrou em wbr\n");
         instruction_WBR(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
     } else if (instruction == WBM) {
-        sscanf(msg, "%d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5]);
-        instruction_WBM(values[1], values[2], values[3], values[4], values[5]);
+        sscanf(msg, "%d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4]);
+        instruction_WBM(values[1], values[2], values[3], values[4]);
     } else if (instruction == DP) {
-        sscanf(msg, "%d %d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6], &values[7], values[8]);
+        sscanf(msg, "%d %d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4], &values[5], &values[6], &values[7], &values[8]);
        	instruction_DP(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
     } else if (instruction == WSM) {
-	sscanf(msg, "%d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4]);
+	    sscanf(msg, "%d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4]);
         instruction_WSM(values[1], values[2], values[3], values[4]);
-    } else if (instruction == CLR) {
-	    clear_screen();
     }
 
     return length;
@@ -182,10 +184,11 @@ static int instruction_WBR (int R, int G, int B, int reg, int x, int y, int offs
     return 1;
 }
 
-static int instruction_WBM (int column, int line, int R, int G, int B) {
+static int instruction_WBM (int endereco_memoria, int R, int G, int B) {
     //Calcula o endereço de memória do bloco com base na coluna e linha
-    int endereco_memoria = (line * 80 + column); // 80: numero de colunas por linha = 245
+    //int endereco_memoria = (line * 80 + column) >> 1; // 80: numero de colunas por linha = 245
 
+    printk(KERN_INFO "%d", endereco_memoria);
     *data_a_ptr = (endereco_memoria << 4) | OPCODE_WBM;
     *data_b_ptr = (B << 6) | (G << 4) | R;
 
@@ -194,7 +197,7 @@ static int instruction_WBM (int column, int line, int R, int G, int B) {
 }
 
 static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, int y, int endereco) {
-    *data_a_ptr = (endereco) | OPCODE_DP;
+    *data_a_ptr = (endereco << 4) | OPCODE_DP;
     *data_b_ptr = (forma << 31) | (B << 28) | (G << 25) | (R << 22) | (tamanho << 18) | (y << 9) | x;
     escrita_buffer();
     return 1;
@@ -208,16 +211,15 @@ static int instruction_WSM (int R, int G, int B, int endereco_memoria) {
     return 1;
 }
 
-//Limpa a tela do monitor (640 x 480)
-static int clear_screen (void) {
+/*static int clear_screen (void) {
 	int i, j;
 	for (i = 0; i < 480; i++) {
 		for (j = 0; j < 640; j++) {
-			instruction_WBM(j, i, 0, 0, 0);	// Define o pixel na posição (j, i) para a cor preta (RGB = 0, 0, 0)
+			instruction_WBM(j, i, 0, 0, 0);	
 		}
 	}
 	return 1;
-}
+}*/
 
 
 // Module metadata
