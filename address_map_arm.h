@@ -2,6 +2,7 @@
 #define DATA_A_BASE 0x80
 #define DATA_B_BASE 0x70
 #define WRREG_BASE 0xc0
+#define WRFULL 0xb0
 
 /* Memory */
 #define DDR_BASE 0x00000000
