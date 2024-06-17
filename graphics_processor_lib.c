@@ -32,6 +32,7 @@ int main() {
 
 
     //verde escuro 1 6 1
+    //ceu azul
     set_background_color(1 ,4, 7);
     
     //set_background_block(0, 3, 6, 0); teste de cor verde olivia
@@ -60,48 +61,61 @@ int main() {
         set_background_block(i, 7, 3, 3);
     }
     
-    //3794 cabeça (1 bloco mais a cima da pele)
 
-
-    //set_background_block(3793, 7, 2, 1);
-
-    //casco até 3793 -> primeira linha casco
+    // CASCO
     for (i = 3784; i < 3794; i++) {
         set_background_block(i, 5, 2, 2);
     }
-
-    //->segunda linha casco
-    set_background_block(3700, 6, 4, 2);
     
-    /*
-    set_background_block(0, 4, 2, 2); //lilás
-    set_background_block(2, 6, 4, 2);
-    set_background_block(6, 7, 2, 1);
-    set_background_block(8, 6, 3, 1);
-    set_background_block(10, 7, 2, 2); //laranja
-    set_background_block(12, 5, 3, 2); //verde limão
-    set_background_block(14, 5, 2, 2); //marrom
-    set_background_block(16, 6, 3, 2); 
-    set_background_block(18, 4, 2, 2); */
+    for (i = 3704; i < 3714; i++) {
+        set_background_block(i, 5, 2, 2);
+    }
+
+    for (i = 3625; i < 3633; i++) {
+        set_background_block(i, 5, 2, 2); 
+    }
+
+    for (i = 3546; i < 3552; i++) {
+        set_background_block(i, 5, 2, 2); 
+    }
+
+    for (i = 3467; i < 3471; i++)
+    set_background_block(i, 5, 2, 2); 
+
+
+    // CABEÇA
+    for (i = 3874; i < 3877; i++) {
+        set_background_block(i, 0, 7, 0);
+    }
+     for (i = 3794; i < 3798; i++) {
+        set_background_block(i, 0, 7, 0);
+    }
+     for (i = 3714; i < 3718; i++) {
+        set_background_block(i, 0, 7, 0);
+    }
+
+     for (i = 3634; i < 3637; i++) {
+        set_background_block(i, 0, 7, 0);
+    }
+
+    //olho
+    set_background_block(3716, 0, 0, 0);
+
+    //TELHADO
+    define_poligon(1, 6, 3, 2, 15, 460, 220, 2);
+
+    //CASA
+    define_poligon(0, 7, 7, 7, 13, 460, 350, 5);
+
+
+
+    define_poligon(0, 7, 5, 2, 2, 460, 405, 4);
+    //define_poligon(0, 1, 1, 1, 2, 460, 405, 3);
+
+    //MENOR REGISTRADOR FICA POR CIMA
     
+    //porta
 
-
-
-    //define_poligon(0, 7, 3, 3, 1, 150, 325, 4);
-    //set_background_block(0, 2, 3, 1);
-    //set_background_block(1, 0, 7, 0);
-    //casco
-    //define_poligon(0, 1, 6, 0, 1, 200, 402, 0); 
-    
-    //g b r
-    //define_poligon(0, 7, 3, 3, 1, 260, 280, 5);
-   
-
-     //primeira linha: 0 - 78
-    //segunda linha: 80 + 78 = 158
-    //0 - 4799
-    //set_background_block(4001, 1, 7, 1);
-    
 
 }
 
