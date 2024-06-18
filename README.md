@@ -22,8 +22,9 @@ O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca e
     - [Kit de desenvolvimento DE1 SoC](#kit-de-desenvolvimento-de1-soc)
     - [Linguagem C](#linguagem-c)
     - [Compilador GCC](#compilador-gcc)
-    - [Monitor](#monitor)
+    - [Monitor VGA](#monitor-vga)
 - [Arquitetura do Processador Gráfico](#arquitetura-do-processador-gragico)
+- [Detalhamento da Lógica de Comunicação](#detalhamento-da-lógica-de-comunicação)
 - [Preparação do Ambiente e Execução do Projeto](#preparação-do-ambiente-e-execução-do-projeto)
 - [Cenários de Testes](#cenários-de-testes)
 - [Conclusão](#conclusão)
@@ -35,3 +36,14 @@ O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca e
 - Vitória Tanan dos Santos
 
 ## Softwares e Periféricos Utilizados
+### Kit de desenvolvimento DE1-SoC
+### Linguagem C
+### Compilador GCC
+### Monitor VGA
+
+## Arquitetura do Processador Gráfico
+
+## Detalhamento da Lógica de Comunicação
+mapeamento de memoria, ... etc
+
+## Preparação do Ambiente e Execução do Projeto
