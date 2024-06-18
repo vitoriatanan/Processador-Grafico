@@ -9,6 +9,8 @@ int main() {
 
     // verde escuro 1 6 1
     // ceu azul
+
+
     //set_background_color(1, 4, 7);
 
     // set_background_block(0, 3, 6, 0); teste de cor verde olivia
@@ -94,9 +96,6 @@ int main() {
 
     // SOL
     define_poligon(0, 7, 7, 0, 5, 50, 50, 6);
-
-    //raios de sol
-    //set_background_block(100, 7, 6, 6);
 
     //SPRITES: árvore
     set_sprite(1, 300, 385 , 4, 1);
