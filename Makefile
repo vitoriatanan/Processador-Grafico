@@ -1,10 +1,7 @@
-# Nome do módulo
 obj-m += graphics_processor_module.o
 
-# Diretório do kernel
 KDIR := /lib/modules/$(shell uname -r)/build
 
-# Diretório do código-fonte atual
 PWD := $(shell pwd)
 
 # Alvo principal (default)
@@ -16,3 +13,7 @@ all:
 clean:
 	$(MAKE) -C $(KDIR) M=$(PWD) clean
 	sudo rmmod graphics_processor_module.ko
+
+# Compilação da biblioteca e programa principal
+lib:
+	gcc graphics_processor_lib.c main.c -o main

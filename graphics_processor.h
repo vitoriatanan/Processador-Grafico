@@ -6,12 +6,11 @@
  * URL:  https://drive.google.com/file/d/1MlIlpB9TSnoPGEMkocr36EH9-CFz8psO/view
  */
 
-
-// Exemplos de constantes para fixar valores de movimento de um sprite 
-#define LEFT    0
-#define RIGHT   4
-#define UP      2
-#define DOWN    6
+// Exemplos de constantes para fixar valores de movimento de um sprite
+#define LEFT         0
+#define RIGHT        4
+#define UP           2
+#define DOWN         6
 #define UPPER_RIGHT  1
 #define UPPER_LEFT   3
 #define BOTTOM_LEFT  5
@@ -60,18 +59,16 @@ typedef struct {
 */
 int set_sprite(int registrador, int x, int y, int offset, int activation_bit);
 
-
 /**
  * Modelar o background através de preenchimento dos blocos.
  * 
- * @param column    Valor da coluna que representa o bloco a ser preenchido.
- * @param line      Valor da linha que representa o bloco a ser preenchido.
+ * @param endereco_memoria    Endereço de memória correspondente ao bloco a ser preenchido
  * @param R         Componente da cor vermelha.
  * @param G         Componente da cor verde.
  * @param B         Componente da cor azul.
  * @return          1 caso operação seja bem sucedida, e 0 caso contrário.
 */
-int set_background_block(int column, int line, int R, int G, int B);
+int set_background_block(int endereco_memoria, int R, int G, int B);
 
 /**
  * Configura a cor base do background.
@@ -83,6 +80,31 @@ int set_background_block(int column, int line, int R, int G, int B);
 */
 int set_background_color(int R, int G, int B);
 
+/**
+ * Posicionar um polígono na tela.
+ * 
+ * @param forma   Formato do polígono, 1 para triângulo e 0 para quadrado.
+ * @param R   Componente da cor vermelha.
+ * @param G   Componente da cor verde.
+ * @param B   Componente da cor azul.
+ * @param tamanho   Tamanho do polígono, de 1 a 15.
+ * @param x   Coordenada x.
+ * @param y   Coordenada y.
+ * @param endereco   Endereço de memória onde o polígono será armazenado.
+ * @return    1 caso operação seja bem sucedida, e 0 caso contrário.
+*/
+int define_poligon(int forma, int R, int G, int B, int tamanho, int x, int y, int endereco);
+
+/**
+ * Define um novo sprite.
+ * 
+ * @param R   Componente da cor vermelha.
+ * @param G   Componente da cor verde.
+ * @param B   Componente da cor azul.
+ * @param endereco_memoria   Endereço de memória onde o sprite será armazenado
+ * @return    1 caso operação seja bem sucedida, e 0 caso contrário.
+*/
+int write_sprite_mem(int R, int G, int B, int endereco_memoria);
 
 /**
  * Responsável por atualizar as coordenadas x e y de um sprit móvel
@@ -91,8 +113,7 @@ int set_background_color(int R, int G, int B);
  * @param sp       Passagem por referência
  * @param mirror   Coordenadas do sprite
 */
-void increase_coordinate(Sprite *sp, int mirror);
-
+void increase_coordinate(Sprite* sp, int mirror);
 
 /**
  * Verifica se ocorreu uma colisão entre dois sprites quaisquer.
@@ -101,5 +122,4 @@ void increase_coordinate(Sprite *sp, int mirror);
  * @param sp2   Passagem por referência da coord_y.
  * @return      1 caso operação seja bem sucedida, e 0 caso contrário.
 */
-int collision(Sprite *sp1, Sprite *sp2);
-
+int collision(Sprite* sp1, Sprite* sp2);
