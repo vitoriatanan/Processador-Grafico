@@ -9,7 +9,7 @@ int main() {
 
     // verde escuro 1 6 1
     // ceu azul
-    set_background_color(1, 4, 7);
+    //set_background_color(1, 4, 7);
 
     // set_background_block(0, 3, 6, 0); teste de cor verde olivia
 
@@ -75,17 +75,36 @@ int main() {
 
     // olho
     set_background_block(3716, 0, 0, 0);
-
-    // TELHADO
-    define_poligon(1, 6, 3, 2, 15, 460, 220, 2);
-
-    // CASA
-    define_poligon(0, 7, 7, 7, 13, 460, 350, 5);
-
-    define_poligon(0, 7, 5, 2, 2, 460, 405, 4);
-    // define_poligon(0, 1, 1, 1, 2, 460, 405, 3);
-
+  
     // MENOR REGISTRADOR FICA POR CIMA
 
-    // porta
+
+    //define_poligon(int forma, int R, int G, int B, int tamanho, int x, int y, int endereco);
+
+
+    // CASA
+    //  Telhado
+    define_poligon(1, 6, 3, 2, 15, 460, 220, 4);
+
+    // Casa
+    define_poligon(0, 7, 7, 7, 13, 460, 350, 3);
+
+    //  Porta
+    define_poligon(0, 0, 0, 0, 3, 460, 400, 5);
+
+    // SOL
+    define_poligon(0, 7, 7, 0, 5, 50, 50, 6);
+
+    //raios de sol
+    //set_background_block(100, 7, 6, 6);
+
+    //SPRITES: árvore
+    set_sprite(1, 300, 385 , 4, 1);
+    set_sprite(2, 100, 385 , 4, 1);
+    set_sprite(3, 50, 430 , 4, 1);
+    set_sprite(4, 220, 450 , 4, 1);
+    set_sprite(5, 560, 430 , 4, 1);
+
+
+    return 0;
 }
