@@ -3,24 +3,22 @@
 
 int main() {
 
+    /**
+     * Chamada das funções para setar elementos e realizar o desenho
+     * 
+     * Desenhos: grama, tartaruga,casa, sol e sprites de árvores.
+    */
 
-    //   //Azul claro (ceu)    set_cor_background_wbr(6, 4, 3)
-    // cor da grama: 1,7,1
+    // Céu
+    set_background_color(1, 4, 7);
 
-    // verde escuro 1 6 1
-    // ceu azul
-
-
-    //set_background_color(1, 4, 7);
-
-    // set_background_block(0, 3, 6, 0); teste de cor verde olivia
-
-    // grama
+    // Grama
     int i;
     for (i = 4000; i < 4800; i++) {
         set_background_block(i, 1, 6, 0);
     }
 
+    /*    TARTARUGA     */
     // patinhas
     define_poligon(0, 1, 6, 0, 1, 200, 402, 0); // patinha 1
     define_poligon(0, 1, 6, 0, 1, 260, 402, 1); // patinha 2
