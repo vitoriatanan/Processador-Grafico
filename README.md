@@ -4,7 +4,7 @@
 ## Sobre
 
 <p align="justify"> 
-O projeto consistiu em ...
+O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca em linguagem C com o intuito de criar uma ponte de comunicação entre o processador gráfico que se encontra na FPGA contida na placa DE1-SoC e um programa a nível de usuário 
 
 </p>
 <p align="justify"> 
