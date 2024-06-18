@@ -122,7 +122,7 @@ static ssize_t device_write(struct file* filp, const char* buffer, size_t length
     int values[MAX_SIZE];
     int instruction = 0;
 
-    while (*wrfull_ptr) {}
+    while (*wrfull_ptr) {} /* Aguarda a fila esvaziar antes de mandar novas instruções */
 
     if (copy_from_user(msg, buffer, length) != 0) {
         printk(KERN_ERR "Erro: copy_from_user falhou\n");
@@ -130,11 +130,11 @@ static ssize_t device_write(struct file* filp, const char* buffer, size_t length
 
     sscanf(msg, "%d", &values[0]);
     instruction = values[0];
+    printk(KERN_INFO "Instrução escolhida: %d", instruction);
 
     if (instruction == WBR) {
         sscanf(msg, "%d %d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4],
                &values[5], &values[6], &values[7], &values[8]);
-        printk(KERN_INFO "entrou em wbr\n");
         instruction_WBR(values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
     } else if (instruction == WBM) {
         sscanf(msg, "%d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4]);
@@ -159,7 +159,7 @@ static void escrita_buffer(void) {
 /* background e sprite */
 static int instruction_WBR(int R, int G, int B, int reg, int x, int y, int offset, int sp) {
 
-    *data_a_ptr = (reg << 4) | OPCODE_WBR; //opcode para WBR e endereço do registrador
+    *data_a_ptr = (reg << 4) | OPCODE_WBR;
     if (sp) {
         *data_b_ptr = (sp << 29) | (x << 19) | (y << 9) | offset;
         printk(KERN_INFO "setou sprite");
@@ -174,7 +174,6 @@ static int instruction_WBM(int endereco_memoria, int R, int G, int B) {
     //Calcula o endereço de memória do bloco com base na coluna e linha
     //int endereco_memoria = (line * 80 + column) >> 1; // 80: numero de colunas por linha = 245
 
-    printk(KERN_INFO "%d", endereco_memoria);
     *data_a_ptr = (endereco_memoria << 4) | OPCODE_WBM;
     *data_b_ptr = (B << 6) | (G << 4) | R;
 
