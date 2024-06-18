@@ -44,6 +44,6 @@ O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca e
 ## Arquitetura do Processador Gráfico
 
 ## Detalhamento da Lógica de Comunicação
-mapeamento de memoria, ... etc
+mapeamento de memoria, ... driver de caractere
 
 ## Preparação do Ambiente e Execução do Projeto
