@@ -171,9 +171,6 @@ static int instruction_WBR(int R, int G, int B, int reg, int x, int y, int offse
 }
 
 static int instruction_WBM(int endereco_memoria, int R, int G, int B) {
-    //Calcula o endereço de memória do bloco com base na coluna e linha
-    //int endereco_memoria = (line * 80 + column) >> 1; // 80: numero de colunas por linha = 245
-
     *data_a_ptr = (endereco_memoria << 4) | OPCODE_WBM;
     *data_b_ptr = (B << 6) | (G << 4) | R;
 
