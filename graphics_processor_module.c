@@ -9,10 +9,6 @@
 #include <linux/uaccess.h>
 #include "./address_map_arm.h"
 
-// https://www.youtube.com/watch?v=oX9ZwMQL2f4&ab_channel=FastbitEmbeddedBrainAcademy
-// https://www.youtube.com/watch?v=DwwZR0EE_1A&list=PLlrqp8hxLfoqSIQFrGbAM5lv5uAnZBB61&index=2&ab_channel=TechoGenius
-// sudo /home/root/Problemas/2024-1/CoLendaInFPGA.sh botar gpu na placa
-
 #define MAX_SIZE     32
 #define BASE_MINOR   71
 #define DEVICE_COUNT 1
@@ -27,7 +23,7 @@
 #define DP           3
 #define WSM          4
 
-void* LW_virtual; // Lightweight bridge base address
+void* LW_virtual;
 volatile int* data_a_ptr;
 volatile int* data_b_ptr;
 volatile int* wrreg_ptr;
@@ -162,7 +158,6 @@ static int instruction_WBR(int R, int G, int B, int reg, int x, int y, int offse
     *data_a_ptr = (reg << 4) | OPCODE_WBR;
     if (sp) {
         *data_b_ptr = (sp << 29) | (x << 19) | (y << 9) | offset;
-        printk(KERN_INFO "setou sprite");
     } else {
         *data_b_ptr = (B << 6) | (G << 3) | R;
     }
