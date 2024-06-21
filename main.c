@@ -18,25 +18,25 @@ int main() {
     }
 
     /*                   TARTARUGA                      */
-    // Patinhas
+    /* Patinhas */
     define_poligon(0, 1, 6, 0, 1, 200, 402, 0); // patinha 1
     define_poligon(0, 1, 6, 0, 1, 260, 402, 1); // patinha 2
 
-    // Entre as patas
+    /* Entre as patas */
     for (i = 3946; i < 3952; i++) {
         set_background_block(i, 0, 7, 0);
     }
 
-    // Rabinho
+    /* Rabinho */
     set_background_block(3863, 0, 7, 0);
 
     
-    // Pele acima da pata
+    /* Pele acima da pata */
     for (i = 3864; i < 3874; i++) {
         set_background_block(i, 7, 3, 3);
     }
 
-    // Casco
+    /* Casco */
     for (i = 3784; i < 3794; i++) {
         set_background_block(i, 5, 2, 2);
     }
@@ -57,7 +57,7 @@ int main() {
         set_background_block(i, 5, 2, 2);
     }
 
-    // Cabeça
+    /* Cabeça */
     for (i = 3874; i < 3877; i++) {
         set_background_block(i, 0, 7, 0);
     }
@@ -72,18 +72,18 @@ int main() {
         set_background_block(i, 0, 7, 0);
     }
 
-    // Olho
+    /* Olho */
     set_background_block(3716, 0, 0, 0);
 
 
     /*                  CASA                 */
-    //  Telhado
+    /*  Telhado */
     define_poligon(1, 6, 3, 2, 15, 460, 220, 4);
 
-    // Estrutura
+    /* Estrutura */
     define_poligon(0, 7, 7, 7, 13, 460, 350, 3);
 
-    //  Porta
+    /*  Porta */
     define_poligon(0, 0, 0, 0, 3, 460, 400, 5);
 
     
