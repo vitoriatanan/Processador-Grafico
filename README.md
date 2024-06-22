@@ -86,8 +86,12 @@ A linguagem C é uma linguagem de programação de alto nível que foi criada no
 
 ### Unidade de Controle
 <p align="justify"> 
-A Unidade de Controle do processador gráfico da placa DE1-SoC desempenha um papel fundamental na gestão das operações internas do processador gráfico. Ela é essencialmente uma Máquina de Estados que gerencia o fluxo de instruções dentro do processador.
+A Unidade de Controle do processador gráfico da placa DE1-SoC desempenha um papel fundamental na gestão das operações internas do processador, operando como uma Máquina de Estados que coordena o fluxo de instruções:
 </p>
+
+- Leitura de Instruções: Responsável por ler as instruções armazenadas na memória, que incluem comandos para modificar o <i>background</i>, movimentar <i>sprites</i> e renderizar polígonos.
+- Decodificação de Instruções: Interpreta os bits das instruções para determinar as ações específicas a serem realizadas pelo processador gráfico.
+- Execução de Instruções: Realiza as operações indicadas pelas instruções, incluindo a alteração do <i>background</i>, renderização de polígonos e movimento de <i>sprites</i>.
 
 ### Banco de Registradores
 ### Módulo de Desenho
