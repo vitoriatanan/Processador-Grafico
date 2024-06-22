@@ -49,7 +49,7 @@ O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca e
 - LEDS, chaves e botões, entre outros.
 
 <p align="center">
-    <img src="" alt="Placa DE1-SoC" width="500">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/placa.jpg" alt="Placa DE1-SoC" width="500">
     <br>
     Figura 1. Placa de desenvolvimento DE1-SoC.
 </p>
@@ -74,7 +74,7 @@ A linguagem C é uma linguagem de programação de alto nível que foi criada no
     A sicronização VGA envolve pulsos de sicronização horizontal (hsync) e vertical (vsync), com períodos específicos denominados back porch, front porch e intervalo de exibição para controlar os dados RGB. Após o pulso hsync, os sinais RGB são desligados (back porch), seguidos pelo intervalo de exibição onde os dados RGB ativam cada pixel, e depois desligados novamente (front porch) antes do próximo pulso hsync.
 </p>
 <p align="center">
-    <img src="" alt="VGA" width="500">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/vga.png" alt="VGA" width="500">
     <br>
     Figura 2. Conexões entre o FPGA e o VGA
 </p>
