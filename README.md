@@ -37,11 +37,52 @@ O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca e
 
 ## Softwares e Periféricos Utilizados
 ### Kit de desenvolvimento DE1-SoC
+
+<p align="justify">
+    A placa de desenvolvimento DE1-SoC é uma plataforma baseada no chip Altera Cyclone V SoC, que integra um processador ARM Cortex-A9 dual-core com uma FPGA da família Cyclone V. A DE1-SoC possui uma ampla variedade de periféricos e interfaces, incluindo:
+</p>
+
+- Interfaces de entrada/saída;
+- Conexões de áudio de vídeo;
+- Interface USB;
+- Conexões Ethernet;
+- LEDS, chaves e botões, entre outros.
+
+<p align="center">
+    <img src="" alt="Placa DE1-SoC" width="500">
+    <br>
+    Figura 1. Placa de desenvolvimento DE1-SoC.
+</p>
+
+
+
 ### Linguagem C
+<p align="justify">
+A linguagem C é uma linguagem de programação de alto nível que foi criada nos anos 70 com o propósito inicial de desenvolver sistemas operacionais. Nos dias atuais, ela permanece bastante popular, sendo amplamente utilizada em sistemas embarcados, no Kernel do Linux, aleḿ de também ter servido de influência para criação de outras linguagens como C#, C++ e Java. No projeto, essa linguagem foi utilizada para desenvolver o código fonte em conjunto com o compilador GCC para execução do programa.
+</p>
+
 ### Compilador GCC
-### Monitor VGA
+<p align="justify"> 
+    GCC é sigla para GNU Compiler Collection, trata-se de um conjunto de compiladores para linguagem de programação C, C++, Objective-C, Fortran, Ada, Go, entre outras. Lançado em 1987, é o compilador padrão na maior parte das distribuições Linux além de estar disponível para muitos sistemas embarcados, incluindo chips baseados em ARM e Power ISA. No projeto, foi utilizado para compilar o código fonte escrito em linguagem C.
+</p>
+
+### Padrão VGA
+<p align="justify"> 
+    A placa DE1-SoC possui um conector D-SUB de 15 pinos para saída VGA, com sinais de sicronização gerados pelo FPGA Cyclone V Soc. Um DAC de vídeo triplo ADV7123 converte sinais digitais para analógicos, representando as cores vermelho, verde e azul, suportando até a resolução SXGA (1280x1024) a 100 MHz.
+    </p>
+    <p align="justify"> 
+    A sicronização VGA envolve pulsos de sicronização horizontal (hsync) e vertical (vsync), com períodos específicos denominados back porch, front porch e intervalo de exibição para controlar os dados RGB. Após o pulso hsync, os sinais RGB são desligados (back porch), seguidos pelo intervalo de exibição onde os dados RGB ativam cada pixel, e depois desligados novamente (front porch) antes do próximo pulso hsync.
+</p>
+<p align="center">
+    <img src="" alt="VGA" width="500">
+    <br>
+    Figura 2. Conexões entre o FPGA e o VGA
+</p>
 
 ## Arquitetura do Processador Gráfico
+<p align="justify"> 
+    O Processador Gráfico 
+</p>
 
 ## Detalhamento da Lógica de Comunicação
 ### Mapeamento de Memória
