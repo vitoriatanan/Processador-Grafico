@@ -81,7 +81,7 @@ A linguagem C é uma linguagem de programação de alto nível que foi criada no
 
 ## Arquitetura do Processador Gráfico
 <p align="justify"> 
-    O Processador Gráfico 
+    O Processador Gráfico é responsável pela renderização e execução de um conjunto de instruções que permitem mover e controlar <i>sprites</i>, modificar a configuração do <i>background</i> da tela e renderizar polígonos, como quadrados e triângulos. As saídas do Processador Gráfico incluem os sinais de sicronização horizontal <i>(h_sync)</i> e vertical <i>(v_sync)</i> do monitor VGA, além dos bits de cores RGB.
 </p>
 
 ## Detalhamento da Lógica de Comunicação
