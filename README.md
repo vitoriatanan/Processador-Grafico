@@ -81,7 +81,7 @@ A linguagem C é uma linguagem de programação de alto nível que foi criada no
 
 ## Arquitetura do Processador Gráfico
 <p align="justify"> 
-    O Processador Gráfico é responsável pela renderização e execução de um conjunto de instruções que permitem mover e controlar <i>sprites</i>, modificar a configuração do <i>background</i> da tela e renderizar polígonos, como quadrados e triângulos. As saídas do Processador Gráfico incluem os sinais de sicronização horizontal <i>(h_sync)</i> e vertical <i>(v_sync)</i> do monitor VGA, além dos bits de cores RGB.
+    O Processador Gráfico é responsável pela renderização e execução de um conjunto de instruções que permitem mover e controlar <i>sprites</i>, modificar a configuração do <i>background</i> da tela e renderizar polígonos, como quadrados e triângulos. As saídas do Processador Gráfico incluem os sinais de sicronização horizontal <i>(h_sync)</i> e vertical <i>(v_sync)</i> do monitor VGA, além dos bits de cores RGB <i>(Red, Green, Blue)</i>.
 </p>
 
 ### Unidade de Controle
@@ -95,15 +95,18 @@ A Unidade de Controle do processador gráfico da placa DE1-SoC desempenha um pap
 
 ### Banco de Registradores
 <p align="justify"> 
-O Banco de Registradores é composto por 32 registradores. O primeiro é reservado para a cor de fundo da tela, enquanto os 31 restantes são dedicados ao armazenamento das informações dos <i>sprites</i>. Essa organização permite que o processador gráfico temporariamente armazene informações essenciais de cada <i>sprite</i>, como coordenadas, offset de memória de um bit de ativação, possibilitando o gerenciamento de até 31 <i>sprites</i> simultaneamente em um único frame de tela.
+O Banco de Registradores é composto por 32 registradores. O primeiro é reservado para a cor de fundo da tela, enquanto os 31 restantes são dedicados ao armazenamento das informações dos <i>sprites</i>. Essa organização permite que o processador gráfico temporariamente armazene informações essenciais de cada <i>sprite</i>, como coordenadas, offset de memória de um bit de ativação, possibilitando o gerenciamento de até 31 <i>sprites</i> simultaneamente em um único <i>frame</i> de tela.
 </p>
 
 ### Módulo de Desenho
 <p align="justify"> 
-O Módulo de Desenho gerencia todo o processo de renderização dos pixels no monitor VGA. Ele converte e envia os dados de cor RGB (<i>Red, Green, Blue</i>) para cada pixel, garantindo a precisão da imagem exibida no monitor. A utilização de uma arquitetura de pipeline permite ao módulo processar múltiplas instruções ao mesmo tempo, aumentando a eficiência do processamento e previnindo distorções na saída do monitor VGA.
+O Módulo de Desenho gerencia todo o processo de renderização dos <i>pixels</i> no monitor VGA. Ele converte e envia os dados de cor RGB para cada <i>pixel</i>, garantindo a precisão da imagem exibida no monitor. A utilização de uma arquitetura de <i>Pipeline</i> permite ao módulo processar múltiplas instruções ao mesmo tempo, aumentando a eficiência do processamento e previnindo distorções na saída do monitor VGA.
 </p>
 
 ### Controlador VGA
+<p align="justify"> 
+O Controlador VGA é responsável por gerar os sinais de sicronização vertical (<i>vsync</i>) e horizontal (<i>hsync</i>), essenciais para a exibição correta dos <i>frames</i> no monitor. Estes sinais são fundamentais para coordenar o processo de varredura do monitor, que ocorre da esquerda para a direita e de cima para baixo. O controlador também fornece as coordenadas X e Y para o processo de varredura, assefurando que cada linha do <i>frame</i> seja renderizada corretamente. Considerando os tempos de sincronização vertical e horizontal, cada tela é atualizada a cada 16,768 ms, resultando em uma taxa de aproximadamente 60 <i>frames</i> por segundo. O módulo coordena ainda a geração dos sinais de sicronização para evitar distorções e garantir que a exibição esteja dentro dos padrões de resolução e taxa de atualização estabelecidos.
+</p>
 
 
 ### Memória de Sprites
