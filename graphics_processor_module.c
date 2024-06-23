@@ -34,6 +34,7 @@ static dev_t device_number = 0;
 static struct cdev cdev;
 static struct class* class = NULL;
 
+
 static int __init iniciar(void);
 static void __exit parar(void);
 static int device_open(struct inode* inode, struct file* filp);
@@ -55,27 +56,34 @@ static struct file_operations fops = {
     .release = device_release,
 };
 
+// Função de inicialização do módulo
 static int __init iniciar(void) {
     int err = 0;
 
+     // Alocação do número de dispositivo de caractere
     if ((err = alloc_chrdev_region(&device_number, BASE_MINOR, DEVICE_COUNT, DEVICE_NAME)) < 0) {
         printk(KERN_ERR "alloc_chrdev_region() falhou, erro %d\n", err);
         return err;
     }
 
+    // Inicialização da estrutura de dispositivo de caractere
     cdev_init(&cdev, &fops);
     cdev.owner = THIS_MODULE;
 
+    // Adição do dispositivo de caractere ao sistema
     if ((err = cdev_add(&cdev, device_number, BASE_MINOR)) < 0) {
         printk(KERN_ERR "cdev_add() falhou, erro: %d\n", err);
         return err;
     }
 
+    // Criação da classe de dispositivo
     class = class_create(THIS_MODULE, DEVICE_NAME);
     device_create(class, NULL, device_number, NULL, DEVICE_NAME);
 
+    // Mapeamento de memória entrada e saida I/O
     LW_virtual = ioremap_nocache(LW_BRIDGE_BASE, LW_BRIDGE_SPAN);
 
+    // Inicialização dos ponteiros para registradores
     data_a_ptr = (int*)(LW_virtual + DATA_A_BASE);
     data_b_ptr = (int*)(LW_virtual + DATA_B_BASE);
     wrreg_ptr = (int*)(LW_virtual + WRREG_BASE);
@@ -86,6 +94,7 @@ static int __init iniciar(void) {
     return 0;
 }
 
+// Função de saída do módulo
 static void __exit parar(void) {
     device_destroy(class, device_number);
     class_destroy(class);
@@ -96,38 +105,47 @@ static void __exit parar(void) {
     printk(KERN_INFO "Driver removido do sistema\n");
 }
 
+// Função chamada quando o dispositivo é aberto
 static int device_open(struct inode* inode, struct file* file) {
     printk(KERN_INFO "Arquivo aberto no espaço do usuário\n");
     return 0;
 }
 
+// Função chamada quando o dispositivo é fechado
 static int device_release(struct inode* inode, struct file* file) {
     printk(KERN_INFO "Arquivo fechado\n");
     return 0;
 }
 
+// Função para leitura do dispositivo
 static ssize_t device_read(struct file* filp, char* buffer, size_t length, loff_t* offset) {
+
+    // Copia a mensagem para o buffer do usuário
     if (copy_to_user(buffer, msg, length) != 0) {
         printk(KERN_ERR "Erro: copy_to_user falhou\n");
     }
     return length;
 }
 
+// Função para escrita no dispositivo
 static ssize_t device_write(struct file* filp, const char* buffer, size_t length, loff_t* offset) {
 
     int values[MAX_SIZE];
     int instruction = 0;
 
-    while (*wrfull_ptr) {} /* Aguarda a fila esvaziar antes de mandar novas instruções */
+    while (*wrfull_ptr) {} // Aguarda a fila esvaziar antes de mandar novas instruções
 
+    // Copia os dados do buffer do usuário para a mensagem
     if (copy_from_user(msg, buffer, length) != 0) {
         printk(KERN_ERR "Erro: copy_from_user falhou\n");
     }
 
+    // Lê a instrução da mensagem
     sscanf(msg, "%d", &values[0]);
     instruction = values[0];
     printk(KERN_INFO "Instrução escolhida: %d", instruction);
 
+    // Executa a instrução com base no código
     if (instruction == WBR) {
         sscanf(msg, "%d %d %d %d %d %d %d %d %d", &values[0], &values[1], &values[2], &values[3], &values[4],
                &values[5], &values[6], &values[7], &values[8]);
@@ -147,12 +165,13 @@ static ssize_t device_write(struct file* filp, const char* buffer, size_t length
     return length;
 }
 
+// Função para escrita no buffer
 static void escrita_buffer(void) {
     *wrreg_ptr = 1;
     *wrreg_ptr = 0;
 }
 
-/* background e sprite */
+// Instrução para escrita de background e sprite
 static int instruction_WBR(int R, int G, int B, int reg, int x, int y, int offset, int sp) {
 
     *data_a_ptr = (reg << 4) | OPCODE_WBR;
@@ -165,6 +184,7 @@ static int instruction_WBR(int R, int G, int B, int reg, int x, int y, int offse
     return 1;
 }
 
+// Instrução para escrita na memória
 static int instruction_WBM(int endereco_memoria, int R, int G, int B) {
     *data_a_ptr = (endereco_memoria << 4) | OPCODE_WBM;
     *data_b_ptr = (B << 6) | (G << 4) | R;
@@ -173,6 +193,7 @@ static int instruction_WBM(int endereco_memoria, int R, int G, int B) {
     return 1;
 }
 
+// Instrução para desenho de padrão
 static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, int y, int endereco) {
     *data_a_ptr = (endereco << 4) | OPCODE_DP;
     *data_b_ptr = (forma << 31) | (B << 28) | (G << 25) | (R << 22) | (tamanho << 18) | (y << 9) | x;
@@ -180,6 +201,7 @@ static int instruction_DP(int forma, int R, int G, int B, int tamanho, int x, in
     return 1;
 }
 
+// Instrução para escrita de sprite na memória
 static int instruction_WSM(int R, int G, int B, int endereco_memoria) {
     *data_a_ptr = (endereco_memoria << 4) | OPCODE_WSM;
     *data_b_ptr = (B << 6) | (G << 4) | R;
@@ -192,5 +214,6 @@ MODULE_AUTHOR("TEC499-TP02-G02");
 MODULE_DESCRIPTION("Driver de caracter pro processador gráfico");
 MODULE_LICENSE("GPL");
 
+//Inicialização e saída do módulo
 module_init(iniciar);
 module_exit(parar);
