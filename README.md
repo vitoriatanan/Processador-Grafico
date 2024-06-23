@@ -69,10 +69,10 @@ A linguagem C é uma linguagem de programação de alto nível que foi criada no
 
 ### Padrão VGA
 <p align="justify"> 
-    A placa DE1-SoC possui um conector D-SUB de 15 pinos para saída VGA, com sinais de sicronização gerados pelo FPGA Cyclone V Soc. Um DAC de vídeo triplo ADV7123 converte sinais digitais para analógicos, representando as cores vermelho, verde e azul, suportando até a resolução SXGA (1280x1024) a 100 MHz.
+     O padrão gráfico utilizado foi o VGA com resolução de 640x480 pixels. A placa DE1-SoC possui um conector D-SUB de 15 pinos para saída VGA, com sinais de sicronização gerados pelo FPGA Cyclone V Soc. Um DAC de vídeo triplo ADV7123 converte sinais digitais para analógicos, representando as cores vermelho, verde e azul, suportando até a resolução SXGA (1280x1024) a 100 MHz.
     </p>
     <p align="justify"> 
-    A sicronização VGA envolve pulsos de sicronização horizontal (hsync) e vertical (vsync), com períodos específicos denominados back porch, front porch e intervalo de exibição para controlar os dados RGB. Após o pulso hsync, os sinais RGB são desligados (back porch), seguidos pelo intervalo de exibição onde os dados RGB ativam cada pixel, e depois desligados novamente (front porch) antes do próximo pulso hsync.
+    A sicronização VGA envolve pulsos de sicronização horizontal (<i>hsync</i>) e vertical (<i>vsync</i>), com períodos específicos denominados <i>back porch</i>, <i>front porch</i> e intervalo de exibição para controlar os dados RGB. Após o pulso <i>hsync</i>, os sinais RGB são desligados (<i>back porch</i>), seguidos pelo intervalo de exibição onde os dados RGB ativam cada <i>pixel</i>, e depois desligados novamente (<i>front porch</i>) antes do próximo pulso <i>hsync</i>.
 </p>
 <p align="center">
     <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/vga.png" alt="VGA" width="600">
@@ -82,7 +82,12 @@ A linguagem C é uma linguagem de programação de alto nível que foi criada no
 
 ## Arquitetura do Processador Gráfico
 <p align="justify"> 
-    O Processador Gráfico é responsável pela renderização e execução de um conjunto de instruções que permitem mover e controlar <i>sprites</i>, modificar a configuração do <i>background</i> da tela e renderizar polígonos, como quadrados e triângulos. As saídas do Processador Gráfico incluem os sinais de sicronização horizontal <i>(h_sync)</i> e vertical <i>(v_sync)</i> do monitor VGA, além dos bits de cores RGB <i>(Red, Green, Blue)</i>.
+    O Processador Gráfico é responsável pela renderização e execução de um conjunto de instruções que permitem mover e controlar <i>sprites</i>, modificar a configuração do <i>background</i> da tela e renderizar polígonos, como quadrados e triângulos. As saídas do Processador Gráfico incluem os sinais de sicronização horizontal <i>(h_sync)</i> e vertical <i>(v_sync)</i> do monitor VGA, além dos bits de cores RGB <i>(Red, Green, Blue)</i>. A Figura 4 ilustra a arquitetura completa do processador gráfico, conforme detalhado no TCC.
+</p>
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/vga.png" alt="VGA" width="600">
+    <br>
+    Figura 4. Estrutura Interna do Processador Gráfico. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 ### Unidade de Controle
@@ -120,6 +125,7 @@ A memória de <i>background</i> é usada para modificar pequenas partes do fundo
 </p>
 
 ### Co-Processador
+O Co-Processador é responsável por gerenciar a construção de polígonos convexos, como quadrados e triângulos. Estes polígonos são renderizados na tela do monitor VGA, trabalhando em conjunto com os sprites e o background. A arquitetura do Co-Processador permite a execução de cálculos necessários para determinar a posição e as características desses polígonos. Ao fazer isso, ele assegura que os polígonos sejam integrados corretamente com outros elementos gráficos, proporcionando uma renderização precisa e sincronizada. Isso é essencial para a exibição coerente e harmoniosa de todos os componentes visuais na tela.
 
 ## Detalhamento da Lógica de Comunicação
 ### Mapeamento de Memória
