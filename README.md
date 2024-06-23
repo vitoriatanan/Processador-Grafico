@@ -64,7 +64,16 @@ A linguagem C é uma linguagem de programação de alto nível que foi criada no
     GCC é sigla para GNU Compiler Collection, trata-se de um conjunto de compiladores para linguagem de programação C, C++, Objective-C, Fortran, Ada, Go, entre outras. Lançado em 1987, é o compilador padrão na maior parte das distribuições Linux além de estar disponível para muitos sistemas embarcados, incluindo chips baseados em ARM e Power ISA. No projeto, foi utilizado para compilar o código fonte escrito em linguagem C.
 </p>
 
-### Monitor CRT
+### Monitor Tubo CRT
+<p align="justify"> 
+O monitor utilizado é um modelo de tubo CRT (<i>Cathode Ray Tube</i>) da DELL, com uma tela de 17 polegadas e uma resolução máxima de 1280x1024 <i>pixels</i>. Ele possui uma interface VGA para conectar-se a placa de desenvolvimento DE1-SoC e exibir imagens.
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/monitor.jpeg" width="500">
+    <br>
+    Figura 2. Monitor Tubo CRT
+</p>
 
 
 ### Padrão VGA
@@ -125,7 +134,9 @@ A memória de <i>background</i> é usada para modificar pequenas partes do fundo
 </p>
 
 ### Co-Processador
+<p align="justify">
 O Co-Processador é responsável por gerenciar a construção de polígonos convexos, como quadrados e triângulos. Estes polígonos são renderizados na tela do monitor VGA, trabalhando em conjunto com os sprites e o background. A arquitetura do Co-Processador permite a execução de cálculos necessários para determinar a posição e as características desses polígonos. Ao fazer isso, ele assegura que os polígonos sejam integrados corretamente com outros elementos gráficos, proporcionando uma renderização precisa e sincronizada. Isso é essencial para a exibição coerente e harmoniosa de todos os componentes visuais na tela.
+</p>
 
 ## Detalhamento da Lógica de Comunicação
 ### Mapeamento de Memória
