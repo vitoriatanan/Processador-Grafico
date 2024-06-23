@@ -85,7 +85,7 @@ A linguagem C é uma linguagem de programação de alto nível que foi criada no
     O Processador Gráfico é responsável pela renderização e execução de um conjunto de instruções que permitem mover e controlar <i>sprites</i>, modificar a configuração do <i>background</i> da tela e renderizar polígonos, como quadrados e triângulos. As saídas do Processador Gráfico incluem os sinais de sicronização horizontal <i>(h_sync)</i> e vertical <i>(v_sync)</i> do monitor VGA, além dos bits de cores RGB <i>(Red, Green, Blue)</i>. A Figura 4 ilustra a arquitetura completa do processador gráfico, conforme detalhado no TCC.
 </p>
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/arquitetura_processador.png" alt="VGA" width="600">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/arquitetura_processador.png" alt="VGA" width="500">
     <br>
     Figura 4. Estrutura Interna do Processador Gráfico. (Fonte: TCC de [Gabriel B. Alves])
 </p>
