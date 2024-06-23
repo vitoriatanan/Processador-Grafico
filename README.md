@@ -54,8 +54,6 @@ O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca e
     Figura 1. Placa de desenvolvimento DE1-SoC.
 </p>
 
-
-
 ### Linguagem C
 <p align="justify">
 A linguagem C é uma linguagem de programação de alto nível que foi criada nos anos 70 com o propósito inicial de desenvolver sistemas operacionais. Nos dias atuais, ela permanece bastante popular, sendo amplamente utilizada em sistemas embarcados, no Kernel do Linux, aleḿ de também ter servido de influência para criação de outras linguagens como C#, C++ e Java. No projeto, essa linguagem foi utilizada para desenvolver o código fonte em conjunto com o compilador GCC para execução do programa.
@@ -65,6 +63,9 @@ A linguagem C é uma linguagem de programação de alto nível que foi criada no
 <p align="justify"> 
     GCC é sigla para GNU Compiler Collection, trata-se de um conjunto de compiladores para linguagem de programação C, C++, Objective-C, Fortran, Ada, Go, entre outras. Lançado em 1987, é o compilador padrão na maior parte das distribuições Linux além de estar disponível para muitos sistemas embarcados, incluindo chips baseados em ARM e Power ISA. No projeto, foi utilizado para compilar o código fonte escrito em linguagem C.
 </p>
+
+### Monitor CRT
+
 
 ### Padrão VGA
 <p align="justify"> 
@@ -108,9 +109,16 @@ O Módulo de Desenho gerencia todo o processo de renderização dos <i>pixels</i
 O Controlador VGA é responsável por gerar os sinais de sicronização vertical (<i>vsync</i>) e horizontal (<i>hsync</i>), essenciais para a exibição correta dos <i>frames</i> no monitor. Estes sinais são fundamentais para coordenar o processo de varredura do monitor, que ocorre da esquerda para a direita e de cima para baixo. O controlador também fornece as coordenadas X e Y para o processo de varredura, assefurando que cada linha do <i>frame</i> seja renderizada corretamente. Considerando os tempos de sincronização vertical e horizontal, cada tela é atualizada a cada 16,768 ms, resultando em uma taxa de aproximadamente 60 <i>frames</i> por segundo. O módulo coordena ainda a geração dos sinais de sicronização para evitar distorções e garantir que a exibição esteja dentro dos padrões de resolução e taxa de atualização estabelecidos.
 </p>
 
-
 ### Memória de Sprites
+<p align="justify"> 
+A memória de <i>sprites</i> é responsável por armazenar os <i>bitmapes</i> de cada <i>sprite</i>. Ela possui uma capacidade de 12.800 palavras de 9 bits, sendo 3 bits destinados para cada componente de cor RBG. Cada <i>sprite</i> tem um tamanho fixo de 20x20 <i>pixels</i>, ocupando 400 posições de memória. Isso permite que até 32 <i>sprites</i> distintos sejam armazenados simultaneamente para uso. Esta estrutura é essencial para a correta exibição e manipulação dos <i>sprites</i> na tela.
+</p>
+
 ### Memória de Background
+<p align="justify">
+A memória de background é usada para modificar pequenas partes do fundo da tela. Ela consiste em 4.800 palavras de 9 bits cada, com 3 bits destinados a cada componente de cor RGB. Esta configuração permite ajustar e atualizar dinamicamente seções específicas do background, garantindo flexibilidade e precisão na exibição gráfica.
+</p>
+
 ### Co-Processador
 
 ## Detalhamento da Lógica de Comunicação
@@ -126,3 +134,5 @@ No contexto do projeto, essa técnica foi usada para ter acesso aos barramentos 
 mapeamento de memoria, ... driver de caractere
 
 ## Preparação do Ambiente e Execução do Projeto
+
+
