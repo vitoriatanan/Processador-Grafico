@@ -4,7 +4,7 @@
 ## Sobre
 
 <p align="justify"> 
-O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca em linguagem C com o intuito de criar uma ponte de comunicação entre o processador gráfico que se encontra na FPGA contida na placa DE1-SoC e um programa a nível de usuário 
+O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca em linguagem C com o intuito de criar uma ponte de comunicação entre o processador gráfico que se encontra na FPGA contida na placa DE1-SoC e um programa a nível de usuário. 
 
 </p>
 <p align="justify"> 
@@ -161,8 +161,15 @@ Para que haja comunicação entre hardware e software no ambiente Linux, é nece
 No contexto do projeto, essa técnica foi usada para ter acesso aos barramentos Data A e Data B do Processador Gráfico, que se encontra na FPGA. O processador ARM (HPS) possui as pontes de acesso HPS-to-FPGA e LightWeight-to-FPGA, que são mapeadas para regiões no espaço de memória do HPS, ao utilizar uma delas é possível acessar os barramentos através da soma da ponte + offset, que representa o endereço base.
 </p>
 
+### Driver de Caractere
 
-mapeamento de memoria, ... driver de caractere
+<p align="justify">
+Para que um usuário tenha acesso a dispositivos de hardware, é necessário interagir com arquivos especiais de dispositivo, que estão agrupados no diretório /dev. As chamadas de sistema como open, read, write, close, lseek, mmap, entre outras, são usadas para interagir com esses dispositivos. Quando tais chamadas são realizadas, o sistema operacional as redireciona para o driver do dispositivo associado ao dispositivo físico.
+<p>
+<p align="justify">
+O driver de dispositivo é um componente do kernel que interage diretamente com o hardware. No caso dos drivers de dispositivos de caractere, eles gerenciam uma pequena quantidade de dados e o acesso a esses dados não requer operações frequentes de busca. Neste caso, as chamadas de sistema são encaminhadas diretamente para os drivers de dispositivo de caractere, que manipulam a comunicação com o hardware de maneira eficiente.
+<p>
+
 
 ## Preparação do Ambiente e Execução do Projeto
 
