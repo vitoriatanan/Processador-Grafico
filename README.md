@@ -94,8 +94,18 @@ A Unidade de Controle do processador gráfico da placa DE1-SoC desempenha um pap
 - Execução de Instruções: Realiza as operações indicadas pelas instruções, incluindo a alteração do <i>background</i>, renderização de polígonos e movimento de <i>sprites</i>.
 
 ### Banco de Registradores
+<p align="justify"> 
+O Banco de Registradores é composto por 32 registradores. O primeiro é reservado para a cor de fundo da tela, enquanto os 31 restantes são dedicados ao armazenamento das informações dos <i>sprites</i>. Essa organização permite que o processador gráfico temporariamente armazene informações essenciais de cada <i>sprite</i>, como coordenadas, offset de memória de um bit de ativação, possibilitando o gerenciamento de até 31 <i>sprites</i> simultaneamente em um único frame de tela.
+</p>
+
 ### Módulo de Desenho
+<p align="justify"> 
+O Módulo de Desenho gerencia todo o processo de renderização dos pixels no monitor VGA. Ele converte e envia os dados de cor RGB (<i>Red, Green, Blue</i>) para cada pixel, garantindo a precisão da imagem exibida no monitor. A utilização de uma arquitetura de pipeline permite ao módulo processar múltiplas instruções ao mesmo tempo, aumentando a eficiência do processamento e previnindo distorções na saída do monitor VGA.
+</p>
+
 ### Controlador VGA
+
+
 ### Memória de Sprites
 ### Memória de Background
 ### Co-Processador
