@@ -21,9 +21,18 @@ O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca e
 - [Softwares e Periféricos Utilizados](#softwares-e-periféricos-utilizados)
     - [Kit de desenvolvimento DE1 SoC](#kit-de-desenvolvimento-de1-soc)
     - [Linguagem C](#linguagem-c)
+    - [Editor de Texto VSCode](#editor-de-texto-vscode)
     - [Compilador GCC](#compilador-gcc)
-    - [Monitor VGA](#monitor-vga)
+    - [Monitor Tubo CRT](#monitor-tubo-crt)
+    - [Padrão VGA](#padrão-vga)
 - [Arquitetura do Processador Gráfico](#arquitetura-do-processador-gragico)
+    - [Unidade de Controle](#unidade-de-controle)
+    - [Banco de Registradores](#banco-de-registradores)
+    - [Módulo de Desenho](#módulo-de-desenho)
+    - [Controlador VGA](#controlador-vga)
+    - [Memória de Sprites](#memória-de-sprites)
+    - [Memória de Background](#memória-de-background)
+    - [Co-Processador](#co-processador)
 - [Detalhamento da Lógica de Comunicação](#detalhamento-da-lógica-de-comunicação)
 - [Preparação do Ambiente e Execução do Projeto](#preparação-do-ambiente-e-execução-do-projeto)
 - [Cenários de Testes](#cenários-de-testes)
@@ -59,7 +68,7 @@ O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca e
 A linguagem C é uma linguagem de programação de alto nível que foi criada nos anos 70 com o propósito inicial de desenvolver sistemas operacionais. Nos dias atuais, ela permanece bastante popular, sendo amplamente utilizada em sistemas embarcados, no Kernel do Linux, aleḿ de também ter servido de influência para criação de outras linguagens como C#, C++ e Java. No projeto, essa linguagem foi utilizada para desenvolver o código fonte em conjunto com o compilador GCC para execução do programa.
 </p>
 
-### Editor de texto VSCode
+### Editor de Texto VSCode
 <p align="justify">
 O Visual Studio Code é um editor de texto bastante popular que tem suporte para Windows, Linux e MacOS. Neste projeto, o VSCode foi utilizado para fins de edição do código em linguagem C, usufruindo do realce de sintaxe que o programa propociona.
 </p>
