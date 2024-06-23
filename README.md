@@ -116,7 +116,7 @@ A memória de <i>sprites</i> é responsável por armazenar os <i>bitmapes</i> de
 
 ### Memória de Background
 <p align="justify">
-A memória de background é usada para modificar pequenas partes do fundo da tela. Ela consiste em 4.800 palavras de 9 bits cada, com 3 bits destinados a cada componente de cor RGB. Esta configuração permite ajustar e atualizar dinamicamente seções específicas do background, garantindo flexibilidade e precisão na exibição gráfica.
+A memória de <i>background</i> é usada para modificar pequenas partes do fundo da tela. Ela consiste em 4.800 palavras de 9 bits cada, com 3 bits destinados a cada componente de cor RGB. Esta configuração permite ajustar e atualizar dinamicamente seções específicas do <i>background</i>, garantindo flexibilidade e precisão na exibição gráfica.
 </p>
 
 ### Co-Processador
