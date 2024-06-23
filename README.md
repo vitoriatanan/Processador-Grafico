@@ -77,7 +77,7 @@ O monitor utilizado é um modelo de tubo CRT (<i>Cathode Ray Tube</i>) da DELL, 
 <p align="center">
     <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/monitor.jpg" width="300">
     <br>
-    Figura 2. Monitor Tubo CRT
+    Figura 3. Monitor Tubo CRT
 </p>
 
 
