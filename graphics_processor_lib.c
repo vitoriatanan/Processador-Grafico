@@ -93,7 +93,7 @@ int set_background_color(int R, int G, int B) {
     sprintf(buffer, "%d %d %d %d %d %d %d %d %d", WBR, R, G, B, 0x0000, 0, 0, 0, 0); /*Prepara o comando para configurar a cor de fundo*/
     int bytesWritten = write(fd, buffer, strlen(buffer)); /*Escreve o comando no dispositivo*/
 
-    close(fd); // Se falhar, imprime um erro e retorna -1
+    close(fd); /* Se falhar, imprime um erro e retorna -1*/
     return bytesWritten;
 }
 
