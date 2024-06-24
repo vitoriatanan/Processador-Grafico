@@ -258,7 +258,10 @@ Para que todo o fluxo funcione corretamente, alguns comandos precisam ser execut
 make
 make lib
 ```
-Isso irá inserir o módulo no kernel e criar o arquivo especial na pasta /dev. Também irá compilar a biblioteca e o arquivo principal (main)
+Os comandos irão inserir o módulo no kernel e criar o arquivo especial na pasta /dev. Também irá compilar a biblioteca e o arquivo principal (main). Para mostrar a imagem no monitor, executar:
+```bash
+sudo ./main
+```
 <p>
 
 ### Fluxograma da Solução Geral do Projeto
