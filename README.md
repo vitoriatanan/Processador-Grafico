@@ -233,20 +233,27 @@ O driver de dispositivo é um componente do kernel que interage diretamente com 
 Para o projeto, foi implementado as funções open, read, write e release. As funções que formam as expressões a serem passadas para os barramentos Data A e Data B também foram incluídas no driver.
 O fluxo de escrita nos barramentos utilizando a linguagem C acontece da seguinte forma:
 
-1. Programa de usuário abre o arquivo especial no diretório /dev através da função **open()**
-2. Programa de usuário utiliza a função **sprintf()** para formar uma string contendo todos os valores que vão ser enviados pro driver e passa pra variável buffer. E a **write()** pra escrever o que está no buffer direto no driver. Ao executar essa ação, a função write do driver é chamada.
+1. Programa de usuário chama uma função da biblioteca passando parâmetros, como por exemplo ```set_background_color(1, 2, 3)```
+2. A função equivalente na biblioteca abre o arquivo especial no diretório /dev através da função **open()**
+3. É utilizada a função **sprintf()** para formar uma string contendo todos os valores que vão ser enviados pro driver e passa pra variável buffer. E a **write()** pra escrever o que está no buffer direto no driver. Ao executar essa ação, a função write do driver é chamada.
 ```c
 sprintf(buffer, "%d %d %d %d %d", WSM, R, G, B, endereco_memoria);  
 int bytesWritten = write(fd, buffer, strlen(buffer)); 
 ```
-
-3. Quando a função **write** do driver é chamada, há uma lógica condicional que verifica qual instrução foi solicitada e a partir daí chama a função respectiva para formar a expressão a serem passadas para os barramentos e enviar o pulso de clock para efetivar a escrita. A identificação das instruções se dão através de constantes, por exemplo, a WBR é o número 1.
+3. Quando a função **write** do driver é chamada, há uma lógica condicional que verifica qual instrução foi solicitada, e a partir daí chama a função respectiva para formar a expressão a ser passada para os barramentos e enviar o pulso de clock para efetivar a escrita. A identificação das instruções se dão através de constantes, por exemplo, a WBR é identificada pelo número 1.
 </p>
 
 
-## Preparação do Ambiente e Execução do Projeto
+## Execução do Projeto
+<p align="justify">
+Para que todo o fluxo funcione corretamente, alguns comandos precisam ser executados. A partir da pasta raiz do projeto, executar:
 
-[...]
+```bash
+make
+make lib
+```
+Isso irá inserir o módulo no kernel e criar o arquivo especial na pasta /dev. Também irá compilar a biblioteca e o arquivo principal (main)
+<p>
 
 ### Fluxograma da Solução Geral do Projeto
 [...]
