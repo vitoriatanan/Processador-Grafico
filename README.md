@@ -228,7 +228,7 @@ A estrutura para configurar os campos da cor base do background está representa
 </p>
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/dimensoes_poligonos.png" alt="Dimensões dos polígonos" width="500">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/dimensoes_poligonos.png" alt="Dimensões dos polígonos" width="300">
     <br>
     Figura X. Dimensões dos Polígonos. (Fonte: TCC de [Gabriel B. Alves])
 </p>
