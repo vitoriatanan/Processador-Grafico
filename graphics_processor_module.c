@@ -301,6 +301,6 @@ MODULE_AUTHOR("TEC499-TP02-G02");
 MODULE_DESCRIPTION("Driver de caracter pro processador gráfico");
 MODULE_LICENSE("GPL");
 
-//Inicialização e saída do módulo
+/*Inicialização e saída do módulo*/
 module_init(iniciar);
 module_exit(parar);
