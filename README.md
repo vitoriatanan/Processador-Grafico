@@ -8,12 +8,13 @@ O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca e
 
 </p>
 <p align="justify"> 
-...
+A plataforma DE1-SoC combina um processador ARM (HPS) com um processador gráfico na FPGA. Essa integração permite que o HPS controle e interaja dinamicamente com o processador gráfico, possibilitando manipulação visual em um monitor VGA de 640×480 pixels.
 
 </p>
 <p align="justify"> 
-...
+A abordagem do projeto incluiu a implementação de funcionalidades para desenhar dois tipos de polígonos quadrados ou triângulos, renderização de sprites na tela VGA, além de desenhar background color e background block. Os módulos de Kernel Linux foram desenvolvidos para realizar a comunicação entre o HPS e a FPGA.
 
+O objetivo principal foi estabelecer uma comunicação eficiente entre o processador gráfico na FPGA da plataforma DE1-SoC e o HPS disponível na mesma plataforma.
 </p>
 
 
@@ -240,6 +241,8 @@ O driver de dispositivo é um componente do kernel que interage diretamente com 
     <br>
     Figura X. Fluxograma da Solução Geral do Projeto.
 </p>
+
+
 
 
 
