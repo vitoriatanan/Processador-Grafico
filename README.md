@@ -254,7 +254,7 @@ Os cenários de testes foram desenvolvidos para verificar as funções do projet
 Para configurar a cor de fundo da tela, foi utilizada a função ```set_background_color(int R, int G, int B)```. Essa função escreve no registrado necessário para definir a cor de fundo. No projeto, a cor escolhida foi azul, representando o céu diurno. A figura abaixo exemplifica como ficaria a cor do background no monitor
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/background color monitor desenho.png" alt="Instrução DP" width="500">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/background color monitor desenho.png" alt="Função Background Color" width="500">
     <br>
     Figura X. Exemplo da cor de Background no monitor
 </p>
@@ -265,7 +265,7 @@ Para configurar a cor de fundo da tela, foi utilizada a função ```set_backgrou
 O desenho de blocos no background foi realizado utilizando a função ```set_background_block(int endereco_memoria, int R, int G, int B)```. Essa função permite desenhar elementos como a grama e a tartaruga (exceto suas patas) na memória de background. Para facilitar o processo, um laço ```for``` foi utilizado para definir as áreas na memória onde esses blocos deveriam ser desenhados. A figura X mostra um exemplo de como deveria ficar o desenho usando os background blocks.
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/background block monitor desenho.png" alt="Instrução DP" width="500">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/background block monitor desenho.png" alt="Função Background Block" width="500">
     <br>
     Figura X. Exemplo do desenho utilizando apenas os blocos
 <p>
