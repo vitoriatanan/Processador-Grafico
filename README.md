@@ -8,7 +8,7 @@ O projeto consistiu em desenvolver um módulo de Kernel Linux e uma biblioteca e
 
 </p>
 <p align="justify"> 
-A plataforma DE1-SoC combina um processador ARM (HPS) com um processador gráfico na FPGA. Essa integração permite que o HPS controle e interaja dinamicamente com o processador gráfico, possibilitando manipulação visual em um monitor VGA de 640×480 pixels.
+A plataforma DE1-SoC combina um processador ARM (HPS) com um processador gráfico na FPGA. Essa integração permite que o HPS controle e interaja com o processador gráfico, possibilitando manipulação visual em um monitor VGA de 640×480 pixels.
 
 </p>
 <p align="justify"> 
