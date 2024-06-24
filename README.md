@@ -281,7 +281,7 @@ Os cenários de testes foram desenvolvidos para verificar as funções do projet
 Para configurar a cor de fundo da tela, foi utilizada a função ```set_background_color(int R, int G, int B)```. Essa função escreve no registrado necessário para definir a cor de fundo. No projeto, a cor escolhida foi azul, representando o céu diurno. A figura abaixo exemplifica como ficaria a cor do background no monitor
 
 <p align="center">
-    <img src="Imagens/background color monitor desenho.png" alt="Função Background Color" width="500">
+    <img src="Imagens/background cor monitor desenho.png" alt="Função Background Color" width="500">
     <br>
     Figura X. Exemplo da cor de Background no monitor
 </p>
