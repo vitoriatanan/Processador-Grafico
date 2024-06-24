@@ -48,78 +48,77 @@ typedef struct {
 } Sprite_Fixed;
 
 /**
- * Posicionar um sprite na tela
+ * \brief Posicionar um sprite na tela
  * 
- * @param registrador      Define o registrador
- * @param x                Definição da coordenada x do sprite
- * @param y                Definição da coordenada y do sprite
- * @param offset           Deslocamento na memória para selecionar o bitmap
- * @param activation_bit   Estado de ativação do sprite
- * @return                 1 caso operação seja bem sucedida, e 0 caso contrário
+ * \param[in] registrador : Define o registrador
+ * \param[in] x : Definição da coordenada x do sprite
+ * \param[in] y : Definição da coordenada y do sprite
+ * \param[in] offset : Deslocamento na memória para selecionar o bitmap
+ * \param[in] activation_bit : Estado de ativação do sprite
+ * \return  1 caso operação seja bem sucedida, e 0 caso contrário
 */
 int set_sprite(int registrador, int x, int y, int offset, int activation_bit);
 
 /**
- * Modelar o background através de preenchimento dos blocos.
+ * \brief Modelar o background através de preenchimento dos blocos.
  * 
- * @param endereco_memoria    Endereço de memória correspondente ao bloco a ser preenchido
- * @param R         Componente da cor vermelha.
- * @param G         Componente da cor verde.
- * @param B         Componente da cor azul.
- * @return          1 caso operação seja bem sucedida, e 0 caso contrário.
+ * \param[in] endereco_memoria : Endereço de memória correspondente ao bloco a ser preenchido
+ * \param[in] R : Componente da cor vermelha.
+ * \param[in] G : Componente da cor verde.
+ * \param[in] B : Componente da cor azul.
+ * \return          1 caso operação seja bem sucedida, e 0 caso contrário.
 */
 int set_background_block(int endereco_memoria, int R, int G, int B);
 
 /**
- * Configura a cor base do background.
+ * \brief Configura a cor base do background.
  * 
- * @param R   Componente da cor vermelha.
- * @param G   Componente da cor verde.
- * @param B   Componente da cor azul.
- * @return    1 caso operação seja bem sucedida, e 0 caso contrário.
+ * \param[in] R :Componente da cor vermelha.
+ * \param[in] G : Componente da cor verde.
+ * \param[in] B : Componente da cor azul.
+ * \return    1 caso operação seja bem sucedida, e 0 caso contrário.
 */
 int set_background_color(int R, int G, int B);
 
 /**
- * Posicionar um polígono na tela.
+ * \brief Posicionar um polígono na tela.
  * 
- * @param forma   Formato do polígono, 1 para triângulo e 0 para quadrado.
- * @param R   Componente da cor vermelha.
- * @param G   Componente da cor verde.
- * @param B   Componente da cor azul.
- * @param tamanho   Tamanho do polígono, de 1 a 15.
- * @param x   Coordenada x.
- * @param y   Coordenada y.
- * @param endereco   Endereço de memória onde o polígono será armazenado.
- * @return    1 caso operação seja bem sucedida, e 0 caso contrário.
+ * \param[in] forma : Formato do polígono, 1 para triângulo e 0 para quadrado.
+ * \param[in] R : Componente da cor vermelha.
+ * \param[in] G : Componente da cor verde.
+ * \param[in] B : Componente da cor azul.
+ * \param[in] tamanho : Tamanho do polígono, de 1 a 15.
+ * \param[in] x : Coordenada x.
+ * \param[in] y : Coordenada y.
+ * \param[in] endereco : Endereço de memória onde o polígono será armazenado.
+ * \return    1 caso operação seja bem sucedida, e 0 caso contrário.
 */
 int define_poligon(int forma, int R, int G, int B, int tamanho, int x, int y, int endereco);
 
 /**
- * Define um novo sprite.
+ * \brief Define um novo sprite.
  * 
- * @param R   Componente da cor vermelha.
- * @param G   Componente da cor verde.
- * @param B   Componente da cor azul.
- * @param endereco_memoria   Endereço de memória onde o sprite será armazenado
- * @return    1 caso operação seja bem sucedida, e 0 caso contrário.
+ * \param[in] R : Componente da cor vermelha.
+ * \param[in] G : Componente da cor verde.
+ * \param[in] B : Componente da cor azul.
+ * \param[in] endereco_memoria : Endereço de memória onde o sprite será armazenado
+ * \return    1 caso operação seja bem sucedida, e 0 caso contrário.
 */
 int write_sprite_mem(int R, int G, int B, int endereco_memoria);
 
 /**
- * Responsável por atualizar as coordenadas x e y de um sprit móvel
- * de acordo ao seu ângulo de movimento e valor de deslocamento.
+ * \brief Responsável por atualizar as coordenadas x e y de um sprit móvel de acordo ao seu ângulo de movimento e valor de deslocamento.
  * 
- * @param sp       Passagem por referência
- * @param mirror   Coordenadas do sprite
+ * \param[in] sp : Passagem por referência
+ * \param[in] mirror : Coordenadas do sprite
 */
 void increase_coordinate(Sprite* sp, int mirror);
 
 /**
- * Verifica se ocorreu uma colisão entre dois sprites quaisquer.
+ * \brief Verifica se ocorreu uma colisão entre dois sprites quaisquer.
  * 
- * @param sp1   Passagem por referência da coord_x.
- * @param sp2   Passagem por referência da coord_y.
- * @return      1 caso operação seja bem sucedida, e 0 caso contrário.
+ * \param[in] sp1 : Passagem por referência da coord_x.
+ * \param[in] sp2 : Passagem por referência da coord_y.
+ * \return      1 caso operação seja bem sucedida, e 0 caso contrário.
 */
 int collision(Sprite* sp1, Sprite* sp2);
