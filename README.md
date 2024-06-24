@@ -235,7 +235,11 @@ O fluxo de escrita nos barramentos utilizando a linguagem C acontece da seguinte
 
 1. Programa de usuário abre o arquivo especial no diretório /dev através da função **open()**
 2. Programa de usuário utiliza a função **sprintf()** para formar uma string contendo todos os valores que vão ser enviados pro driver e passa pra variável buffer. E a **write()** pra escrever o que está no buffer direto no driver. Ao executar essa ação, a função write do driver é chamada.
-![Exemplo da função sprintf](Imagens/sprintf.png)
+```c
+sprintf(buffer, "%d %d %d %d %d", WSM, R, G, B, endereco_memoria);  
+int bytesWritten = write(fd, buffer, strlen(buffer)); 
+```
+
 3. Quando a função **write** do driver é chamada, há uma lógica condicional que verifica qual instrução foi solicitada e a partir daí chama a função respectiva para formar a expressão a serem passadas para os barramentos e enviar o pulso de clock para efetivar a escrita. A identificação das instruções se dão através de constantes, por exemplo, a WBR é o número 1.
 </p>
 
