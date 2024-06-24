@@ -34,6 +34,7 @@ O objetivo principal foi estabelecer uma comunicação eficiente entre o process
     - [Memória de Sprites](#memória-de-sprites)
     - [Memória de Background](#memória-de-background)
     - [Co-Processador](#co-processador)
+    - [Instruções do Processador Gráfico](#instruções-do-processador-gráfico)
 - [Detalhamento da Lógica de Comunicação](#detalhamento-da-lógica-de-comunicação)
 - [Preparação do Ambiente e Execução do Projeto](#preparação-do-ambiente-e-execução-do-projeto)
 - [Cenários de Testes](#cenários-de-testes)
