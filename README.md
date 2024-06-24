@@ -162,7 +162,6 @@ No contexto do projeto, essa técnica foi usada para ter acesso aos barramentos 
 </p>
 
 ### Driver de Caractere
-
 <p align="justify">
 Para que um usuário tenha acesso a dispositivos de hardware, é necessário interagir com arquivos especiais de dispositivo, que estão agrupados no diretório /dev. As chamadas de sistema como open, read, write, close, lseek, mmap, entre outras, são usadas para interagir com esses dispositivos. Quando tais chamadas são realizadas, o sistema operacional as redireciona para o driver do dispositivo associado ao dispositivo físico.
 <p>
@@ -173,4 +172,63 @@ O driver de dispositivo é um componente do kernel que interage diretamente com 
 
 ## Preparação do Ambiente e Execução do Projeto
 
+[...]
 
+### Instruções do Processador Gráfico:
+<p align="justify">
+
+- Escrita no Banco de Registradores (WBR): Essa instrução armazena informações sobre a cor base do <i>background</i> e dos <i>sprites</i>. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0000. Dos 32 registradores dispobíveis, o primeiro é utilizado para armazenar as informações do <i>background</i>, enquanto os outros 31 registradores guardam informações dos <i>sprites</i>.
+A estrutura para configurar os campos da cor base do background está representada na ##Figura X##, onde os campos R, G e B configuram a cor base. A configuração dos <i>sprites</i> está na ###Figura X###, onde o <i>sprite</i> é definido pelo offset, que indica o endereço de memória, os campos X e Y definem as coordenadas de localização dos <i>sprites</i>, e o campo sp serve para habilitar ou desabilitar um <i>sprite</i>.
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucaoWBR.png" alt="Instrução WBR" width="500">
+    <br>
+    Figura X. Instruções WBR para alteração da cor base do <i>background</i>. (Fonte: TCC de [Gabriel B. Alves])
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucao_WBR_sprites.png" alt="Instrução WBR" width="500">
+    <br>
+    Figura X. Instruções WBR para configurar um <i>sprite</i>. (Fonte: TCC de [Gabriel B. Alves])
+</p>
+
+<p align="justify">
+
+- Escrita na Memória de Sprites (WSM): Essa instrução armazena ou altera o conteúdo presente na memória de sprites. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0001. A instrução é representada na Figura X. O campo endereço de memória especifica a localização do sprite na memória a ser editado, enquanto os campos R, G e B definem as novas cores para o local desejado.
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucaoWSM.png" alt="Instrução WSM" width="500">
+    <br>
+    Figura X. Instruções WSM para editar o conteúdo na memória de <i>sprites</i>. (Fonte: TCC de [Gabriel B. Alves])
+</p>
+
+
+<p align="justify">
+
+- Escrita na Memória de Background (WBM): Essa instrução armazena ou altera o conteúdo na Memória de Background. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0010. O campo endereço de memória corresponde a um bloco 8x8 pixels. Com uma resolução de 640x480 pixels, a tela é dividida em 80x60 blocos, conforme representado na Figura 11.
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/divisao_background.png" alt="Instrução WBM" width="200">
+    <br>
+    Figura X. Divisão da área do <i>Background</i>. (Fonte: TCC de [Gabriel B. Alves])
+</p>
+
+<p align="justify">
+
+- Definição de um Polígono (DP): Essa instrução é utilizada para renderizar polígonos, conforme mostrado na Figura X. Para que o processador gráfico execute essa instrução, o <b>opcode</b> é configurado como 0011. O campo <b>endereço</b> indica a posição de memória onde a instrução será armazenada. Os campos <b>ref_point X</b> e <b>ref_point Y</b> definem as coordenadas para a renderização do polígono. O campo tamanho especifica as dimensões do polígono (base e altura), conforme indicado na Tabela I. As componentes <b>RGB</b> determinam a cor do polígono, e o campo <b>forma</b> define se o polígono será um quadrado (0) ou triângulo (1).
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucaoDP.png" alt="Instrução DP" width="500">
+    <br>
+    Figura X. Instruções DP para definição de um polígono. (Fonte: TCC de [Gabriel B. Alves])
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/dimensao_poligonos.png" alt="Dimensões dos polígonos" width="300">
+    <br>
+    Figura X. Dimensões dos Polígonos. (Fonte: TCC de [Gabriel B. Alves])
+</p>
