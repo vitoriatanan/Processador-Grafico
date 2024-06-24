@@ -209,7 +209,7 @@ A estrutura para configurar os campos da cor base do background está representa
 </p>
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/divisao_background.png" alt="Instrução WBM" width="300">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/divisao_background.png" alt="Instrução WBM" width="200">
     <br>
     Figura X. Divisão da área do <i>Background</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
