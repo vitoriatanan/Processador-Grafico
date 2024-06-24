@@ -162,7 +162,6 @@ No contexto do projeto, essa técnica foi usada para ter acesso aos barramentos 
 </p>
 
 ### Driver de Caractere
-
 <p align="justify">
 Para que um usuário tenha acesso a dispositivos de hardware, é necessário interagir com arquivos especiais de dispositivo, que estão agrupados no diretório /dev. As chamadas de sistema como open, read, write, close, lseek, mmap, entre outras, são usadas para interagir com esses dispositivos. Quando tais chamadas são realizadas, o sistema operacional as redireciona para o driver do dispositivo associado ao dispositivo físico.
 <p>
@@ -173,4 +172,16 @@ O driver de dispositivo é um componente do kernel que interage diretamente com 
 
 ## Preparação do Ambiente e Execução do Projeto
 
+[...]
+
+### Instruções do Processador Gráfico:
+<p align="justify">
+- Escrita no Banco de Registradores (WBR): Essa instrução armazena informações sobre a cor base do <i>background</i> e dos <i>sprites</i>. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0000. A estrutura para configurar os campos da cor base do background, está representada na Figura X, enquanto a configuração dos sprites está na Figura X.
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/WBR.png" alt="Instrução WBR" width="500">
+    <br>
+    Figura X. Instrução WBR para aletração da cor base do background. (Fonte: TCC de [Gabriel B. Alves])
+</p>
 
