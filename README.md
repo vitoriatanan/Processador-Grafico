@@ -34,6 +34,7 @@ O objetivo principal foi estabelecer uma comunicação eficiente entre o process
     - [Memória de Sprites](#memória-de-sprites)
     - [Memória de Background](#memória-de-background)
     - [Co-Processador](#co-processador)
+    - [Instruções do Processador Gráfico](#instruções-do-processador-gráfico)
 - [Detalhamento da Lógica de Comunicação](#detalhamento-da-lógica-de-comunicação)
 - [Preparação do Ambiente e Execução do Projeto](#preparação-do-ambiente-e-execução-do-projeto)
 - [Cenários de Testes](#cenários-de-testes)
@@ -252,7 +253,56 @@ O fluxo de escrita nos barramentos utilizando a linguagem C acontece da seguinte
     Figura X. Fluxograma da Solução Geral do Projeto.
 </p>
 
+## Cenário de Testes
 
+<p align="justify">
+Os cenários de testes foram desenvolvidos para verificar as funções do projeto e se as mesmas estavam se comportando conforme o esperado. Abaixo está cada cenário de teste realizado:
+<P>
+<p align="justify">
+<b>Exibição da cor do background da tela:</b> 
+
+Para configurar a cor de fundo da tela, foi utilizada a função ```set_background_color(int R, int G, int B)```. Essa função escreve no registrado necessário para definir a cor de fundo. No projeto, a cor escolhida foi azul, representando o céu diurno. A figura abaixo exemplifica como ficaria a cor do background no monitor
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/background color monitor desenho.png" alt="Instrução DP" width="500">
+    <br>
+    Figura X. Exemplo da cor de Background no monitor
+</p>
+<p>
+<p align="justify">
+<b>Desenho de background blocks:</b> 
+
+O desenho de blocos no background foi realizado utilizando a função ```set_background_block(int endereco_memoria, int R, int G, int B)```. Essa função permite desenhar elementos como a grama e a tartaruga (exceto suas patas) na memória de background. Para facilitar o processo, um laço ```for``` foi utilizado para definir as áreas na memória onde esses blocos deveriam ser desenhados. A figura X mostra um exemplo de como deveria ficar o desenho usando os background blocks.
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/background block monitor desenho.png" alt="Instrução DP" width="500">
+    <br>
+    Figura X. Exemplo do desenho utilizando apenas os blocos
+<p>
+
+<p align="justify">
+<b>Desenho de polígonos:</b>
+
+Para renderizar e definir polígonos na tela, foi utilizada a função ```define_poligon(int forma, int R, int G, int B, int tamanho, int x, int y, int endereco)```. Polígonos foram fundamentais para desenhar elementos como o sol, as patas da tartaruga e a estrutura da casa no projeto. Abaixo, na figura X está presente um exemplo dos polígonos utilizados no desenho
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/poligonos desenho monitor.png" alt="Função de Polígonos" width="500">
+    <br>
+    Figura X. Polígonos utilizados no desenho
+<p>
+<p>
+
+<p align="justify">
+<b>Configuração de sprites:</b> 
+
+A função ```set_sprite(int reg, int x, int y, int offset, int activation_bit)``` foi empregada para configurar e exibir sprites na tela. A figura X demonstra um exemplo final do desenho com sprites.
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/sprites desenho monitor.png" alt="Função de Sprites" width="500">
+    <br>
+    Figura X. Exemplo desenho final com os sprites
+<p>
+<p>
 
 
 
