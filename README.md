@@ -59,7 +59,7 @@ O objetivo principal foi estabelecer uma comunicação eficiente entre o process
 - LEDS, chaves e botões, entre outros.
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/placa.jpg" alt="Placa DE1-SoC" width="500">
+    <img src="Imagens/placa.jpg" alt="Placa DE1-SoC" width="500">
     <br>
     Figura 1. Placa de desenvolvimento DE1-SoC.
 </p>
@@ -85,7 +85,7 @@ O monitor utilizado é um modelo de tubo CRT (<i>Cathode Ray Tube</i>) da DELL, 
 </p>
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/monitor.jpg" width="300">
+    <img src="Imagens/monitor.jpg" width="300">
     <br>
     Figura 3. Monitor Tubo CRT
 </p>
@@ -99,7 +99,7 @@ O monitor utilizado é um modelo de tubo CRT (<i>Cathode Ray Tube</i>) da DELL, 
     A sicronização VGA envolve pulsos de sicronização horizontal (<i>hsync</i>) e vertical (<i>vsync</i>), com períodos específicos denominados <i>back porch</i>, <i>front porch</i> e intervalo de exibição para controlar os dados RGB. Após o pulso <i>hsync</i>, os sinais RGB são desligados (<i>back porch</i>), seguidos pelo intervalo de exibição onde os dados RGB ativam cada <i>pixel</i>, e depois desligados novamente (<i>front porch</i>) antes do próximo pulso <i>hsync</i>.
 </p>
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/vga.png" alt="VGA" width="600">
+    <img src="Imagens/vga.png" alt="VGA" width="600">
     <br>
     Figura 2. Conexões entre o FPGA e o VGA
 </p>
@@ -109,7 +109,7 @@ O monitor utilizado é um modelo de tubo CRT (<i>Cathode Ray Tube</i>) da DELL, 
     O Processador Gráfico é responsável pela renderização e execução de um conjunto de instruções que permitem mover e controlar <i>sprites</i>, modificar a configuração do <i>background</i> da tela e renderizar polígonos, como quadrados e triângulos. As saídas do Processador Gráfico incluem os sinais de sicronização horizontal <i>(h_sync)</i> e vertical <i>(v_sync)</i> do monitor VGA, além dos bits de cores RGB <i>(Red, Green, Blue)</i>. A Figura 4 ilustra a arquitetura completa do processador gráfico, conforme detalhado no TCC.
 </p>
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/arquitetura_processador.png" alt="VGA" width="500">
+    <img src="Imagens/arquitetura_processador.png" alt="VGA" width="500">
     <br>
     Figura 4. Estrutura Interna do Processador Gráfico. (Fonte: TCC de [Gabriel B. Alves])
 </p>
@@ -161,13 +161,13 @@ A estrutura para configurar os campos da cor base do background está representa
 </p>
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucaoWBR.png" alt="Instrução WBR" width="500">
+    <img src="Imagens/instrucaoWBR.png" alt="Instrução WBR" width="500">
     <br>
     Figura X. Instruções WBR para alteração da cor base do <i>background</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucao_WBR_sprites.png" alt="Instrução WBR" width="500">
+    <img src="Imagens/instrucao_WBR_sprites.png" alt="Instrução WBR" width="500">
     <br>
     Figura X. Instruções WBR para configurar um <i>sprite</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
@@ -178,7 +178,7 @@ A estrutura para configurar os campos da cor base do background está representa
 </p>
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucaoWSM.png" alt="Instrução WSM" width="500">
+    <img src="Imagens/instrucaoWSM.png" alt="Instrução WSM" width="500">
     <br>
     Figura X. Instruções WSM para editar o conteúdo na memória de <i>sprites</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
@@ -190,7 +190,7 @@ A estrutura para configurar os campos da cor base do background está representa
 </p>
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/divisao_background.png" alt="Instrução WBM" width="200">
+    <img src="Imagens/divisao_background.png" alt="Instrução WBM" width="200">
     <br>
     Figura X. Divisão da área do <i>Background</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
@@ -201,13 +201,13 @@ A estrutura para configurar os campos da cor base do background está representa
 </p>
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucaoDP.png" alt="Instrução DP" width="500">
+    <img src="Imagens/instrucaoDP.png" alt="Instrução DP" width="500">
     <br>
     Figura X. Instruções DP para definição de um polígono. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/dimensao_poligonos.png" alt="Dimensões dos polígonos" width="300">
+    <img src="Imagens/dimensao_poligonos.png" alt="Dimensões dos polígonos" width="300">
     <br>
     Figura X. Dimensões dos Polígonos. (Fonte: TCC de [Gabriel B. Alves])
 </p>
@@ -224,10 +224,20 @@ No contexto do projeto, essa técnica foi usada para ter acesso aos barramentos 
 ### Driver de Caractere
 <p align="justify">
 Para que um usuário tenha acesso a dispositivos de hardware, é necessário interagir com arquivos especiais de dispositivo, que estão agrupados no diretório /dev. As chamadas de sistema como open, read, write, close, lseek, mmap, entre outras, são usadas para interagir com esses dispositivos. Quando tais chamadas são realizadas, o sistema operacional as redireciona para o driver do dispositivo associado ao dispositivo físico.
-<p>
+</p>
 <p align="justify">
 O driver de dispositivo é um componente do kernel que interage diretamente com o hardware. No caso dos drivers de dispositivos de caractere, eles gerenciam uma pequena quantidade de dados e o acesso a esses dados não requer operações frequentes de busca. Neste caso, as chamadas de sistema são encaminhadas diretamente para os drivers de dispositivo de caractere, que manipulam a comunicação com o hardware de maneira eficiente.
-<p>
+</p>
+<p align="justify">
+Para o projeto, foi implementado as funções open, read, write e release. As funções que formam as expressões a serem passadas para os barramentos Data A e Data B também foram incluídas no driver.
+O fluxo de escrita nos barramentos utilizando a linguagem C acontece da seguinte forma:
+
+1. Programa de usuário abre o arquivo especial no diretório /dev através da função **open()**
+2. Programa de usuário utiliza a função **sprintf()** para formar uma string contendo todos os valores que vão ser enviados pro driver e passa pra variável buffer. E a **write()** pra escrever o que está no buffer direto no driver. Ao executar essa ação, a função write do driver é chamada.
+![Exemplo da função sprintf](Imagens/sprintf.png)
+3. Quando a função **write** do driver é chamada, há uma lógica condicional que verifica qual instrução foi solicitada e a partir daí chama a função respectiva para formar a expressão a serem passadas para os barramentos e enviar o pulso de clock para efetivar a escrita. A identificação das instruções se dão através de constantes, por exemplo, a WBR é o número 1.
+</p>
+
 
 ## Preparação do Ambiente e Execução do Projeto
 
