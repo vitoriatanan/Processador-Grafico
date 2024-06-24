@@ -276,7 +276,7 @@ O desenho de blocos no background foi realizado utilizando a função ```set_bac
 Para renderizar e definir polígonos na tela, foi utilizada a função ```define_poligon(int forma, int R, int G, int B, int tamanho, int x, int y, int endereco)```. Polígonos foram fundamentais para desenhar elementos como o sol, as patas da tartaruga e a estrutura da casa no projeto. Abaixo, na figura X está presente um exemplo dos polígonos utilizados no desenho
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/poligo desenho monitor.png" alt="Instrução DP" width="500">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/poligonos desenho monitor.png" alt="Função de Polígonos" width="500">
     <br>
     Figura X. Polígonos utilizados no desenho
 <p>
@@ -288,7 +288,7 @@ Para renderizar e definir polígonos na tela, foi utilizada a função ```define
 A função ```set_sprite(int reg, int x, int y, int offset, int activation_bit)``` foi empregada para configurar e exibir sprites na tela. A figura X demonstra um exemplo final do desenho com sprites.
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/sprites desenho monitor.png" alt="Instrução DP" width="500">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/sprites desenho monitor.png" alt="Função de Sprites" width="500">
     <br>
     Figura X. Exemplo desenho final com os sprites
 <p>
