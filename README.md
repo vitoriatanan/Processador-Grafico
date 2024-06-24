@@ -220,6 +220,12 @@ Para que haja comunicação entre hardware e software no ambiente Linux, é nece
 </p>
 <p align="justify"> 
 No contexto do projeto, essa técnica foi usada para ter acesso aos barramentos Data A e Data B do Processador Gráfico, que se encontra na FPGA. O processador ARM (HPS) possui as pontes de acesso HPS-to-FPGA e LightWeight-to-FPGA, que são mapeadas para regiões no espaço de memória do HPS, ao utilizar uma delas é possível acessar os barramentos através da soma da ponte + offset, que representa o endereço base.
+    
+```c
+// LW_virtual => endereço da LightWeight-to-FPGA
+// DATA_A_BASE => endereço base do barramento data A, representando o offset
+data_a_ptr = (int*)(LW_virtual + DATA_A_BASE);
+```
 </p>
 
 ### Driver de Caractere
