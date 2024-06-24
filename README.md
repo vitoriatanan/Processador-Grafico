@@ -331,6 +331,19 @@ A função ```set_sprite(int reg, int x, int y, int offset, int activation_bit)`
 <p>
 <p>
 
+### Conclusão
+
+<p align="justify">
+O objetivo deste projeto foi estabelecer uma comunicação eficiente entre o HPS e a FPGA. Os resultados alcançados foram satisfatórios, especialmente na geração de uma imagem estática. No entanto, para avançar em direção à geração de imagens dinâmicas, é necessário realizar estudos adicionais e desenvolver projetos futuros.
+<p>
+
+<p align="justify">
+Dentro do escopo proposto, foi possível efetuar a comunicação entre o software e o hardware utilizando barramentos. Isso demonstra a viabilidade e a funcionalidade da interface de comunicação.
+<p>
+
+<p align="justify">
+Em conclusão, o projeto mostrou que a comunicação entre o HPS e a FPGA é viável e eficaz para a geração de imagens estáticas. O próximo passo será aprofundar os estudos e os desenvolvimentos necessários para alcançar a geração de imagens dinâmicas.
+<p>
 
 
 
