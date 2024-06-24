@@ -236,7 +236,7 @@ O driver de dispositivo é um componente do kernel que interage diretamente com 
 [...]
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/fluxograma.jpeg" alt="Fluxograma" width="300">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/fluxograma.jpeg" alt="Fluxograma" width="600">
     <br>
     Figura X. Fluxograma da Solução Geral do Projeto.
 </p>
