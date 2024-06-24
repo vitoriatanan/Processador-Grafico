@@ -176,12 +176,51 @@ O driver de dispositivo é um componente do kernel que interage diretamente com 
 
 ### Instruções do Processador Gráfico:
 <p align="justify">
-- Escrita no Banco de Registradores (WBR): Essa instrução armazena informações sobre a cor base do <i>background</i> e dos <i>sprites</i>. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0000. A estrutura para configurar os campos da cor base do background, está representada na Figura X, enquanto a configuração dos sprites está na Figura X.
+- Escrita no Banco de Registradores (WBR): Essa instrução armazena informações sobre a cor base do <i>background</i> e dos <i>sprites</i>. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0000. Dos 32 registradores dispobíveis, o primeiro é utilizado para armazenar as informações do <i>background</i>, enquanto os outros 31 registradores guardam informações dos <i>sprites</i>.
+A estrutura para configurar os campos da cor base do background está representada na ##Figura X##, onde os campos R, G e B configuram a cor base. A configuração dos <i>sprites</i> está na ###Figura X###, onde o <i>sprite</i> é definido pelo offset, que indica o endereço de memória, os campos X e Y definem as coordenadas de localização dos <i>sprites</i>, e o campo sp serve para habilitar ou desabilitar um <i>sprite</i>.
 </p>
 
 <p align="center">
     <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucaoWBR.png" alt="Instrução WBR" width="500">
     <br>
-    Figura X. Instrução WBR para aletração da cor base do background. (Fonte: TCC de [Gabriel B. Alves])
+    Figura X. Instruções WBR para alteração da cor base do <i>background</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucao_WBR_sprites.png" alt="Instrução WBR" width="500">
+    <br>
+    Figura X. Instruções WBR para configurar um <i>sprite</i>. (Fonte: TCC de [Gabriel B. Alves])
+</p>
+
+<p align="justify">
+- Escrita na Memória de Sprites (WSM): Essa instrução armazena ou altera o conteúdo presente na memória de sprites. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0001. A instrução é representada na Figura X. O campo endereço de memória especifica a localização do sprite na memória a ser editado, enquanto os campos R, G e B definem as novas cores para o local desejado.
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucaoWSM.png" alt="Instrução WSM" width="500">
+    <br>
+    Figura X. Instruções WSM para editar o conteúdo na memória de <i>sprites</i>. (Fonte: TCC de [Gabriel B. Alves])
+</p>
+
+
+<p align="justify">
+- Escrita na Memória de Background (WBM): Essa instrução armazena ou altera o conteúdo na Memória de Background. Para que o processador gráfico execute essa instrução, o opcode é configrado para 0010. O campo endereço de memória corresponde a um bloco 8x8 pixels. Com uma resolução de 640x480 pixels, a tela é dividida em 80x60 blocos, conforme representado na Figura 11.
+
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/divisao_background.png" alt="Instrução WBM" width="500">
+    <br>
+    Figura X. Divisão da área do <i>Background</i>. (Fonte: TCC de [Gabriel B. Alves])
+</p>
+
+<p align="justify">
+- Definição de um Polígono (DP):  
+
+</p>
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucaoWSM.png" alt="Instrução WSM" width="500">
+    <br>
+    Figura X. Instruções WSM para editar o conteúdo na memória de sprites. (Fonte: TCC de [Gabriel B. Alves])
+</p>
