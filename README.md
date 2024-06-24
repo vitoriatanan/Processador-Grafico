@@ -270,6 +270,13 @@ Isso irá inserir o módulo no kernel e criar o arquivo especial na pasta /dev. 
     Figura X. Fluxograma da Solução Geral do Projeto.
 </p>
 
+### Imagem Final do Projeto
+<p align="center">
+    <img src="Imagens/imagem final do desenho.jpg" alt="Imagem Final do Projeto" width="600">
+    <br>
+    Figura X. Imagem Final do Projeto.
+</p>
+
 ## Cenário de Testes
 
 <p align="justify">
@@ -320,6 +327,7 @@ A função ```set_sprite(int reg, int x, int y, int offset, int activation_bit)`
     Figura X. Exemplo desenho final com os sprites
 <p>
 <p>
+
 
 
 
