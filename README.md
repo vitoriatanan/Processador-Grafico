@@ -103,7 +103,7 @@ O monitor utilizado é um modelo de tubo CRT (<i>Cathode Ray Tube</i>) da DELL, 
     Figura 2. Conexões entre o FPGA e o VGA
 </p>
 
-## Arquitetura do Processador Gráfico
+## Arquitetura e Instruções do Processador Gráfico
 <p align="justify"> 
     O Processador Gráfico é responsável pela renderização e execução de um conjunto de instruções que permitem mover e controlar <i>sprites</i>, modificar a configuração do <i>background</i> da tela e renderizar polígonos, como quadrados e triângulos. As saídas do Processador Gráfico incluem os sinais de sicronização horizontal <i>(h_sync)</i> e vertical <i>(v_sync)</i> do monitor VGA, além dos bits de cores RGB <i>(Red, Green, Blue)</i>. A Figura 4 ilustra a arquitetura completa do processador gráfico, conforme detalhado no TCC.
 </p>
@@ -152,29 +152,7 @@ A memória de <i>background</i> é usada para modificar pequenas partes do fundo
 O Co-Processador é responsável por gerenciar a construção de polígonos convexos, como quadrados e triângulos. Estes polígonos são renderizados na tela do monitor VGA, trabalhando em conjunto com os sprites e o background. A arquitetura do Co-Processador permite a execução de cálculos necessários para determinar a posição e as características desses polígonos. Ao fazer isso, ele assegura que os polígonos sejam integrados corretamente com outros elementos gráficos, proporcionando uma renderização precisa e sincronizada. Isso é essencial para a exibição coerente e harmoniosa de todos os componentes visuais na tela.
 </p>
 
-## Detalhamento da Lógica de Comunicação
-### Mapeamento de Memória
-<p align="justify"> 
-Para que haja comunicação entre hardware e software no ambiente Linux, é necessário aplicar a técnica de mapeamento de memória. Devido ao Linux utilizar um sistema de memória virtual, os endereços físicos do hardware não ficam disponíveis para acesso direto em programas em execução. O Kernel disponibiliza a função mmap que pode ser usada em conjunto com o arquivo /dev/mem e assim mapear os endereços físicos para endereços virtuais, permitindo o acesso ao hardware.
-</p>
-<p align="justify"> 
-No contexto do projeto, essa técnica foi usada para ter acesso aos barramentos Data A e Data B do Processador Gráfico, que se encontra na FPGA. O processador ARM (HPS) possui as pontes de acesso HPS-to-FPGA e LightWeight-to-FPGA, que são mapeadas para regiões no espaço de memória do HPS, ao utilizar uma delas é possível acessar os barramentos através da soma da ponte + offset, que representa o endereço base.
-</p>
-
-### Driver de Caractere
-<p align="justify">
-Para que um usuário tenha acesso a dispositivos de hardware, é necessário interagir com arquivos especiais de dispositivo, que estão agrupados no diretório /dev. As chamadas de sistema como open, read, write, close, lseek, mmap, entre outras, são usadas para interagir com esses dispositivos. Quando tais chamadas são realizadas, o sistema operacional as redireciona para o driver do dispositivo associado ao dispositivo físico.
-<p>
-<p align="justify">
-O driver de dispositivo é um componente do kernel que interage diretamente com o hardware. No caso dos drivers de dispositivos de caractere, eles gerenciam uma pequena quantidade de dados e o acesso a esses dados não requer operações frequentes de busca. Neste caso, as chamadas de sistema são encaminhadas diretamente para os drivers de dispositivo de caractere, que manipulam a comunicação com o hardware de maneira eficiente.
-<p>
-
-
-## Preparação do Ambiente e Execução do Projeto
-
-[...]
-
-### Instruções do Processador Gráfico:
+### Instruções do Processador Gráfico
 <p align="justify">
 
 - Escrita no Banco de Registradores (WBR): Essa instrução armazena informações sobre a cor base do <i>background</i> e dos <i>sprites</i>. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0000. Dos 32 registradores dispobíveis, o primeiro é utilizado para armazenar as informações do <i>background</i>, enquanto os outros 31 registradores guardam informações dos <i>sprites</i>.
@@ -232,3 +210,36 @@ A estrutura para configurar os campos da cor base do background está representa
     <br>
     Figura X. Dimensões dos Polígonos. (Fonte: TCC de [Gabriel B. Alves])
 </p>
+
+## Detalhamento da Lógica de Comunicação
+### Mapeamento de Memória
+<p align="justify"> 
+Para que haja comunicação entre hardware e software no ambiente Linux, é necessário aplicar a técnica de mapeamento de memória. Devido ao Linux utilizar um sistema de memória virtual, os endereços físicos do hardware não ficam disponíveis para acesso direto em programas em execução. O Kernel disponibiliza a função mmap que pode ser usada em conjunto com o arquivo /dev/mem e assim mapear os endereços físicos para endereços virtuais, permitindo o acesso ao hardware.
+</p>
+<p align="justify"> 
+No contexto do projeto, essa técnica foi usada para ter acesso aos barramentos Data A e Data B do Processador Gráfico, que se encontra na FPGA. O processador ARM (HPS) possui as pontes de acesso HPS-to-FPGA e LightWeight-to-FPGA, que são mapeadas para regiões no espaço de memória do HPS, ao utilizar uma delas é possível acessar os barramentos através da soma da ponte + offset, que representa o endereço base.
+</p>
+
+### Driver de Caractere
+<p align="justify">
+Para que um usuário tenha acesso a dispositivos de hardware, é necessário interagir com arquivos especiais de dispositivo, que estão agrupados no diretório /dev. As chamadas de sistema como open, read, write, close, lseek, mmap, entre outras, são usadas para interagir com esses dispositivos. Quando tais chamadas são realizadas, o sistema operacional as redireciona para o driver do dispositivo associado ao dispositivo físico.
+<p>
+<p align="justify">
+O driver de dispositivo é um componente do kernel que interage diretamente com o hardware. No caso dos drivers de dispositivos de caractere, eles gerenciam uma pequena quantidade de dados e o acesso a esses dados não requer operações frequentes de busca. Neste caso, as chamadas de sistema são encaminhadas diretamente para os drivers de dispositivo de caractere, que manipulam a comunicação com o hardware de maneira eficiente.
+<p>
+
+## Preparação do Ambiente e Execução do Projeto
+
+[...]
+
+### Fluxograma da Solução Geral do Projeto
+[...]
+
+<p align="center">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/fluxograma.jpeg" alt="Fluxograma" width="600">
+    <br>
+    Figura X. Fluxograma da Solução Geral do Projeto.
+</p>
+
+
+
