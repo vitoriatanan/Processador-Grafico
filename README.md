@@ -180,7 +180,7 @@ O driver de dispositivo é um componente do kernel que interage diretamente com 
 </p>
 
 <p align="center">
-    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/WBR.png" alt="Instrução WBR" width="500">
+    <img src="https://github.com/vitoriatanan/Processador-Grafico/blob/main/Imagens/instrucaoWBR.png" alt="Instrução WBR" width="500">
     <br>
     Figura X. Instrução WBR para aletração da cor base do background. (Fonte: TCC de [Gabriel B. Alves])
 </p>
