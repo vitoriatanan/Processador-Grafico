@@ -36,7 +36,7 @@ O objetivo principal foi estabelecer uma comunicação eficiente entre o process
     - [Co-Processador](#co-processador)
     - [Instruções do Processador Gráfico](#instruções-do-processador-gráfico)
 - [Detalhamento da Lógica de Comunicação](#detalhamento-da-lógica-de-comunicação)
-- [Preparação do Ambiente e Execução do Projeto](#preparação-do-ambiente-e-execução-do-projeto)
+- [Execução do Projeto](#execução-do-projeto)
 - [Cenários de Testes](#cenários-de-testes)
 - [Conclusão](#conclusão)
 - [Referências](#referências)
@@ -88,7 +88,7 @@ O monitor utilizado é um modelo de tubo CRT (<i>Cathode Ray Tube</i>) da DELL, 
 <p align="center">
     <img src="Imagens/monitor.jpg" width="300">
     <br>
-    Figura 3. Monitor Tubo CRT
+    Figura 2. Monitor Tubo CRT
 </p>
 
 
@@ -102,7 +102,7 @@ O monitor utilizado é um modelo de tubo CRT (<i>Cathode Ray Tube</i>) da DELL, 
 <p align="center">
     <img src="Imagens/vga.png" alt="VGA" width="600">
     <br>
-    Figura 2. Conexões entre o FPGA e o VGA
+    Figura 3. Conexões entre o FPGA e o VGA
 </p>
 
 ## Arquitetura e Instruções do Processador Gráfico
@@ -170,7 +170,7 @@ A estrutura para configurar os campos da cor base do background está representa
 <p align="center">
     <img src="Imagens/instrucao_WBR_sprites.png" alt="Instrução WBR" width="500">
     <br>
-    Figura X. Instruções WBR para configurar um <i>sprite</i>. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 5. Instruções WBR para configurar um <i>sprite</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 <p align="justify">
@@ -181,7 +181,7 @@ A estrutura para configurar os campos da cor base do background está representa
 <p align="center">
     <img src="Imagens/instrucaoWSM.png" alt="Instrução WSM" width="500">
     <br>
-    Figura X. Instruções WSM para editar o conteúdo na memória de <i>sprites</i>. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 6. Instruções WSM para editar o conteúdo na memória de <i>sprites</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 
@@ -193,7 +193,7 @@ A estrutura para configurar os campos da cor base do background está representa
 <p align="center">
     <img src="Imagens/divisao_background.png" alt="Instrução WBM" width="200">
     <br>
-    Figura X. Divisão da área do <i>Background</i>. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 7. Divisão da área do <i>Background</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 <p align="justify">
@@ -204,13 +204,13 @@ A estrutura para configurar os campos da cor base do background está representa
 <p align="center">
     <img src="Imagens/instrucaoDP.png" alt="Instrução DP" width="500">
     <br>
-    Figura X. Instruções DP para definição de um polígono. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 8. Instruções DP para definição de um polígono. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 <p align="center">
     <img src="Imagens/dimensao_poligonos.png" alt="Dimensões dos polígonos" width="300">
     <br>
-    Figura X. Dimensões dos Polígonos. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 9. Dimensões dos Polígonos. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 ## Detalhamento da Lógica de Comunicação
@@ -249,6 +249,21 @@ int bytesWritten = write(fd, buffer, strlen(buffer));
 4. Quando a função **write** do driver é chamada, há uma lógica condicional que verifica qual instrução foi solicitada, e a partir daí chama a função respectiva para formar a expressão a ser passada para os barramentos e enviar o pulso de clock para efetivar a escrita. A identificação das instruções se dão através de constantes, por exemplo, a WBR é identificada pelo número 1.
 </p>
 
+### Fluxograma da Solução Geral
+
+<p align="center">
+    <img src="Imagens/fluxograma.jpeg" alt="Fluxograma" width="600">
+    <br>
+    Figura 10. Fluxograma da Solução Geral do Projeto.
+</p>
+
+### Imagem Final
+<p align="center">
+    <img src="Imagens/imagem final do desenho.jpg" alt="Imagem Final do Projeto" width="600">
+    <br>
+    Figura 11. Imagem Final do Projeto.
+</p>
+
 
 ## Execução do Projeto
 <p align="justify">
@@ -264,21 +279,6 @@ sudo ./main
 ```
 <p>
 
-### Fluxograma da Solução Geral do Projeto
-[...]
-
-<p align="center">
-    <img src="Imagens/fluxograma.jpeg" alt="Fluxograma" width="600">
-    <br>
-    Figura X. Fluxograma da Solução Geral do Projeto.
-</p>
-
-### Imagem Final do Projeto
-<p align="center">
-    <img src="Imagens/imagem final do desenho.jpg" alt="Imagem Final do Projeto" width="600">
-    <br>
-    Figura X. Imagem Final do Projeto.
-</p>
 
 ## Cenário de Testes
 
@@ -293,7 +293,7 @@ Para configurar a cor de fundo da tela, foi utilizada a função ```set_backgrou
 <p align="center">
     <img src="Imagens/background cor monitor desenho.png" alt="Função Background Color" width="500">
     <br>
-    Figura X. Exemplo da cor de Background no monitor
+    Figura 12. Exemplo da cor de Background no monitor
 </p>
 <p>
 <p align="justify">
@@ -304,7 +304,7 @@ O desenho de blocos no background foi realizado utilizando a função ```set_bac
 <p align="center">
     <img src="Imagens/background block monitor desenho.png" alt="Função Background Block" width="500">
     <br>
-    Figura X. Exemplo do desenho utilizando apenas os blocos
+    Figura 13. Exemplo do desenho utilizando apenas os blocos
 <p>
 
 <p align="justify">
@@ -315,7 +315,7 @@ Para renderizar e definir polígonos na tela, foi utilizada a função ```define
 <p align="center">
     <img src="Imagens/poligonos desenho monitor.png" alt="Função de Polígonos" width="500">
     <br>
-    Figura X. Polígonos utilizados no desenho
+    Figura 14. Polígonos utilizados no desenho
 <p>
 <p>
 
@@ -327,7 +327,7 @@ A função ```set_sprite(int reg, int x, int y, int offset, int activation_bit)`
 <p align="center">
     <img src="Imagens/sprites desenho monitor.png" alt="Função de Sprites" width="500">
     <br>
-    Figura X. Exemplo desenho final com os sprites
+    Figura 15. Exemplo desenho final com os sprites
 <p>
 <p>
 
@@ -353,8 +353,10 @@ Em conclusão, o projeto mostrou que a comunicação entre o HPS e o Processador
 
 <b>Technologies, Terasic. DE1-SoC User Manual</b>. Disponível em: <http://www.ee.ic.ac.uk/pcheung/teaching/ee2_digital/de1-soc_user_manual.pdf.>
 
+
 SÁ BARRETO, Gabriel. <b>Desenvolvimento de uma Arquitetura Baseada em Sprites para criação de Jogos 2D em Ambientes Reconfiguráveis utilizando dispositivos FPGA</b>. s.d. 14 f. Trabalho de Conclusão de Curso (Graduação em Engenharia de Computação) Universidade Estadual de Feira de Santana, Bahia.
 
 <b>Lab 1: Acessando dispositivos de Hardware da FPGA</b>. Bahia: Universidade Estadual de Feira de Santana, 2024
+
 
 
