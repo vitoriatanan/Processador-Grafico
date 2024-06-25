@@ -236,7 +236,7 @@ Para que um usuário tenha acesso a dispositivos de hardware, é necessário int
 O driver de dispositivo é um componente do kernel que interage diretamente com o hardware. No caso dos drivers de dispositivos de caractere, eles gerenciam uma pequena quantidade de dados e o acesso a esses dados não requer operações frequentes de busca. Neste caso, as chamadas de sistema são encaminhadas diretamente para os drivers de dispositivo de caractere, que manipulam a comunicação com o hardware de maneira eficiente.
 </p>
 <p align="justify">
-Para o projeto, foi implementado as funções open, read, write e release. As funções que formam as expressões a serem passadas para os barramentos Data A e Data B também foram incluídas no driver.
+No projeto, foi implementado as funções open, read, write e release. As funções que formam as expressões a serem passadas para os barramentos Data A e Data B também foram incluídas no driver.
 O fluxo de escrita nos barramentos utilizando a linguagem C acontece da seguinte forma:
 
 1. Programa de usuário chama uma função da biblioteca passando parâmetros, como por exemplo ```set_background_color(1, 2, 3)```
@@ -277,14 +277,15 @@ Os comandos irão inserir o módulo no kernel e criar o arquivo especial na past
 ```bash
 sudo ./main
 ```
-<p>
+</p>
 
 
 ## Cenário de Testes
 
 <p align="justify">
 Os cenários de testes foram desenvolvidos para verificar as funções do projeto e se as mesmas estavam se comportando conforme o esperado. Abaixo está cada cenário de teste realizado:
-<P>
+</p>
+
 <p align="justify">
 <b>Exibição da cor do background da tela:</b> 
 
@@ -295,7 +296,7 @@ Para configurar a cor de fundo da tela, foi utilizada a função ```set_backgrou
     <br>
     Figura 12. Exemplo da cor de Background no monitor
 </p>
-<p>
+
 <p align="justify">
 <b>Desenho de background blocks:</b> 
 
@@ -316,8 +317,7 @@ Para renderizar e definir polígonos na tela, foi utilizada a função ```define
     <img src="Imagens/poligonos desenho monitor.png" alt="Função de Polígonos" width="500">
     <br>
     Figura 14. Polígonos utilizados no desenho
-<p>
-<p>
+</p>
 
 <p align="justify">
 <b>Configuração de sprites:</b> 
@@ -328,22 +328,21 @@ A função ```set_sprite(int reg, int x, int y, int offset, int activation_bit)`
     <img src="Imagens/sprites desenho monitor.png" alt="Função de Sprites" width="500">
     <br>
     Figura 15. Exemplo desenho final com os sprites
-<p>
-<p>
+</p>
 
 ### Conclusão
 
 <p align="justify">
 O objetivo deste projeto foi estabelecer uma comunicação eficiente entre o HPS e o Processador Gráfico. Os resultados alcançados foram satisfatórios, especialmente na geração de uma imagem estática. No entanto, para avançar em direção à geração de imagens dinâmicas, é necessário realizar estudos adicionais e desenvolver projetos futuros.
-<p>
+</p>
 
 <p align="justify">
 Dentro do escopo proposto, foi possível efetuar a comunicação entre o software e o hardware utilizando barramentos. Isso demonstra a viabilidade e a funcionalidade da interface de comunicação.
-<p>
+</p>
 
 <p align="justify">
 Em conclusão, o projeto mostrou que a comunicação entre o HPS e o Processador Gráfico é viável e eficaz para a geração de imagens estáticas. O próximo passo será aprofundar os estudos e os desenvolvimentos necessários para alcançar a geração de imagens dinâmicas.
-<p>
+</p>
 
 ### Referências
 
