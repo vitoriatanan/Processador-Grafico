@@ -300,7 +300,7 @@ Para configurar a cor de fundo da tela, foi utilizada a função ```set_backgrou
 <p align="justify">
 <b>Desenho de background blocks:</b> 
 
-O desenho de blocos no background foi realizado utilizando a função ```set_background_block(int endereco_memoria, int R, int G, int B)```. Essa função permite desenhar elementos como a grama e a tartaruga (exceto suas patas) na memória de background. Para facilitar o processo, um laço ```for``` foi utilizado para definir as áreas na memória onde esses blocos deveriam ser desenhados. A figura X mostra um exemplo de como deveria ficar o desenho usando os background blocks.
+O desenho de blocos no background foi realizado utilizando a função ```set_background_block(int endereco_memoria, int R, int G, int B)```. Essa função permite desenhar elementos como a grama e a tartaruga (exceto suas patas) na memória de background. Para facilitar o processo, um laço ```for``` foi utilizado para definir as áreas na memória onde esses blocos deveriam ser desenhados. A Figura 14 mostra um exemplo de como deveria ficar o desenho usando os background blocks.
 
 <p align="center">
     <img src="Imagens/background block monitor desenho.png" alt="Função Background Block" width="500">
