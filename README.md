@@ -159,7 +159,6 @@ O Co-Processador é responsável por gerenciar a construção de polígonos conv
 
 ### Instruções do Processador Gráfico
 <p align="justify">
-
 - Escrita no Banco de Registradores (WBR): Essa instrução armazena informações sobre a cor base do <i>background</i> e dos <i>sprites</i>. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0000. Dos 32 registradores dispobíveis, o primeiro é utilizado para armazenar as informações do <i>background</i>, enquanto os outros 31 registradores guardam informações dos <i>sprites</i>.
 A estrutura para configurar os campos da cor base do background está representada na Figura 5, onde os campos R, G e B configuram a cor base. A configuração dos <i>sprites</i> está na Figura 6, onde o <i>sprite</i> é definido pelo offset, que indica o endereço de memória, os campos X e Y definem as coordenadas de localização dos <i>sprites</i>, e o campo sp serve para habilitar ou desabilitar um <i>sprite</i>.
 </p>
@@ -177,7 +176,6 @@ A estrutura para configurar os campos da cor base do background está representa
 </p>
 
 <p align="justify">
-
 - Escrita na Memória de Sprites (WSM): Essa instrução armazena ou altera o conteúdo presente na memória de sprites. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0001. A instrução é representada na Figura 7. O campo endereço de memória especifica a localização do sprite na memória a ser editado, enquanto os campos R, G e B definem as novas cores para o local desejado.
 </p>
 
@@ -189,7 +187,6 @@ A estrutura para configurar os campos da cor base do background está representa
 
 
 <p align="justify">
-
 - Escrita na Memória de Background (WBM): Essa instrução armazena ou altera o conteúdo na Memória de Background. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0010. O campo endereço de memória corresponde a um bloco 8x8 pixels. Com uma resolução de 640x480 pixels, a tela é dividida em 80x60 blocos, conforme representado na Figura 8.
 </p>
 
@@ -200,7 +197,6 @@ A estrutura para configurar os campos da cor base do background está representa
 </p>
 
 <p align="justify">
-
 - Definição de um Polígono (DP): Essa instrução é utilizada para renderizar polígonos, conforme mostrado na Figura 9. Para que o processador gráfico execute essa instrução, o <b>opcode</b> é configurado como 0011. O campo <b>endereço</b> indica a posição de memória onde a instrução será armazenada. Os campos <b>ref_point X</b> e <b>ref_point Y</b> definem as coordenadas para a renderização do polígono. O campo tamanho especifica as dimensões do polígono (base e altura), conforme indicado na Figura 10. As componentes <b>RGB</b> determinam a cor do polígono, e o campo <b>forma</b> define se o polígono será um quadrado (0) ou triângulo (1).
 </p>
 
@@ -246,13 +242,13 @@ O fluxo de escrita nos barramentos utilizando a linguagem C acontece da seguinte
 2. A função equivalente na biblioteca abre o arquivo especial no diretório /dev através da função **open()**
 3. É utilizada a função **sprintf()** para formar uma string contendo todos os valores que vão ser enviados pro driver e passa pra variável buffer. E a **write()** pra escrever o que está no buffer direto no driver através do **fd** (file descriptor). Ao executar essa ação, a função write do driver é chamada.
 ```c
-sprintf(buffer, "%d %d %d %d %d", WSM, R, G, B, endereco_memoria);  
-int bytesWritten = write(fd, buffer, strlen(buffer)); 
+    sprintf(buffer, "%d %d %d %d %d", WSM, R, G, B, endereco_memoria);  
+    int bytesWritten = write(fd, buffer, strlen(buffer)); 
 ```
 4. Quando a função **write** do driver é chamada, há uma lógica condicional que verifica qual instrução foi solicitada, e a partir daí chama a função respectiva para formar a expressão a ser passada para os barramentos e enviar o pulso de clock para efetivar a escrita. A identificação das instruções se dão através de constantes, por exemplo, a WBR é identificada pelo número 1.
 </p>
 
-### Fluxograma da Solução Geral
+### Fluxograma da Solução Geral do Projeto
 
 <p align="center">
     <img src="Imagens/fluxograma.jpeg" alt="Fluxograma" width="600">
