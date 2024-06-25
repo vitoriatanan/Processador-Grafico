@@ -158,59 +158,59 @@ O Co-Processador é responsável por gerenciar a construção de polígonos conv
 <p align="justify">
 
 - Escrita no Banco de Registradores (WBR): Essa instrução armazena informações sobre a cor base do <i>background</i> e dos <i>sprites</i>. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0000. Dos 32 registradores dispobíveis, o primeiro é utilizado para armazenar as informações do <i>background</i>, enquanto os outros 31 registradores guardam informações dos <i>sprites</i>.
-A estrutura para configurar os campos da cor base do background está representada na ##Figura X##, onde os campos R, G e B configuram a cor base. A configuração dos <i>sprites</i> está na ###Figura X###, onde o <i>sprite</i> é definido pelo offset, que indica o endereço de memória, os campos X e Y definem as coordenadas de localização dos <i>sprites</i>, e o campo sp serve para habilitar ou desabilitar um <i>sprite</i>.
+A estrutura para configurar os campos da cor base do background está representada na Figura 5, onde os campos R, G e B configuram a cor base. A configuração dos <i>sprites</i> está na Figura 6, onde o <i>sprite</i> é definido pelo offset, que indica o endereço de memória, os campos X e Y definem as coordenadas de localização dos <i>sprites</i>, e o campo sp serve para habilitar ou desabilitar um <i>sprite</i>.
 </p>
 
 <p align="center">
     <img src="Imagens/instrucaoWBR.png" alt="Instrução WBR" width="500">
     <br>
-    Figura X. Instruções WBR para alteração da cor base do <i>background</i>. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 5. Instruções WBR para alteração da cor base do <i>background</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 <p align="center">
     <img src="Imagens/instrucao_WBR_sprites.png" alt="Instrução WBR" width="500">
     <br>
-    Figura 5. Instruções WBR para configurar um <i>sprite</i>. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 6. Instruções WBR para configurar um <i>sprite</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 <p align="justify">
 
-- Escrita na Memória de Sprites (WSM): Essa instrução armazena ou altera o conteúdo presente na memória de sprites. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0001. A instrução é representada na Figura X. O campo endereço de memória especifica a localização do sprite na memória a ser editado, enquanto os campos R, G e B definem as novas cores para o local desejado.
+- Escrita na Memória de Sprites (WSM): Essa instrução armazena ou altera o conteúdo presente na memória de sprites. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0001. A instrução é representada na Figura 7. O campo endereço de memória especifica a localização do sprite na memória a ser editado, enquanto os campos R, G e B definem as novas cores para o local desejado.
 </p>
 
 <p align="center">
     <img src="Imagens/instrucaoWSM.png" alt="Instrução WSM" width="500">
     <br>
-    Figura 6. Instruções WSM para editar o conteúdo na memória de <i>sprites</i>. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 7. Instruções WSM para editar o conteúdo na memória de <i>sprites</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 
 <p align="justify">
 
-- Escrita na Memória de Background (WBM): Essa instrução armazena ou altera o conteúdo na Memória de Background. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0010. O campo endereço de memória corresponde a um bloco 8x8 pixels. Com uma resolução de 640x480 pixels, a tela é dividida em 80x60 blocos, conforme representado na Figura 11.
+- Escrita na Memória de Background (WBM): Essa instrução armazena ou altera o conteúdo na Memória de Background. Para que o processador gráfico execute essa instrução, o opcode é configurado como 0010. O campo endereço de memória corresponde a um bloco 8x8 pixels. Com uma resolução de 640x480 pixels, a tela é dividida em 80x60 blocos, conforme representado na Figura 8.
 </p>
 
 <p align="center">
     <img src="Imagens/divisao_background.png" alt="Instrução WBM" width="200">
     <br>
-    Figura 7. Divisão da área do <i>Background</i>. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 8. Divisão da área do <i>Background</i>. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 <p align="justify">
 
-- Definição de um Polígono (DP): Essa instrução é utilizada para renderizar polígonos, conforme mostrado na Figura X. Para que o processador gráfico execute essa instrução, o <b>opcode</b> é configurado como 0011. O campo <b>endereço</b> indica a posição de memória onde a instrução será armazenada. Os campos <b>ref_point X</b> e <b>ref_point Y</b> definem as coordenadas para a renderização do polígono. O campo tamanho especifica as dimensões do polígono (base e altura), conforme indicado na Tabela I. As componentes <b>RGB</b> determinam a cor do polígono, e o campo <b>forma</b> define se o polígono será um quadrado (0) ou triângulo (1).
+- Definição de um Polígono (DP): Essa instrução é utilizada para renderizar polígonos, conforme mostrado na Figura 9. Para que o processador gráfico execute essa instrução, o <b>opcode</b> é configurado como 0011. O campo <b>endereço</b> indica a posição de memória onde a instrução será armazenada. Os campos <b>ref_point X</b> e <b>ref_point Y</b> definem as coordenadas para a renderização do polígono. O campo tamanho especifica as dimensões do polígono (base e altura), conforme indicado na Figura 10. As componentes <b>RGB</b> determinam a cor do polígono, e o campo <b>forma</b> define se o polígono será um quadrado (0) ou triângulo (1).
 </p>
 
 <p align="center">
     <img src="Imagens/instrucaoDP.png" alt="Instrução DP" width="500">
     <br>
-    Figura 8. Instruções DP para definição de um polígono. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 9. Instruções DP para definição de um polígono. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 <p align="center">
     <img src="Imagens/dimensao_poligonos.png" alt="Dimensões dos polígonos" width="300">
     <br>
-    Figura 9. Dimensões dos Polígonos. (Fonte: TCC de [Gabriel B. Alves])
+    Figura 10. Dimensões dos Polígonos. (Fonte: TCC de [Gabriel B. Alves])
 </p>
 
 ## Detalhamento da Lógica de Comunicação
@@ -254,14 +254,14 @@ int bytesWritten = write(fd, buffer, strlen(buffer));
 <p align="center">
     <img src="Imagens/fluxograma.jpeg" alt="Fluxograma" width="600">
     <br>
-    Figura 10. Fluxograma da Solução Geral do Projeto.
+    Figura 11. Fluxograma da Solução Geral do Projeto.
 </p>
 
 ### Imagem Final
 <p align="center">
     <img src="Imagens/imagem final do desenho.jpg" alt="Imagem Final do Projeto" width="600">
     <br>
-    Figura 11. Imagem Final do Projeto.
+    Figura 12. Imagem Final do Projeto.
 </p>
 
 
@@ -294,7 +294,7 @@ Para configurar a cor de fundo da tela, foi utilizada a função ```set_backgrou
 <p align="center">
     <img src="Imagens/background cor monitor desenho.png" alt="Função Background Color" width="500">
     <br>
-    Figura 12. Exemplo da cor de Background no monitor
+    Figura 13. Exemplo da cor de Background no monitor
 </p>
 
 <p align="justify">
@@ -305,7 +305,7 @@ O desenho de blocos no background foi realizado utilizando a função ```set_bac
 <p align="center">
     <img src="Imagens/background block monitor desenho.png" alt="Função Background Block" width="500">
     <br>
-    Figura 13. Exemplo do desenho utilizando apenas os blocos
+    Figura 14. Exemplo do desenho utilizando apenas os blocos
 <p>
 
 <p align="justify">
@@ -316,7 +316,7 @@ Para renderizar e definir polígonos na tela, foi utilizada a função ```define
 <p align="center">
     <img src="Imagens/poligonos desenho monitor.png" alt="Função de Polígonos" width="500">
     <br>
-    Figura 14. Polígonos utilizados no desenho
+    Figura 15. Polígonos utilizados no desenho
 </p>
 
 <p align="justify">
@@ -327,7 +327,7 @@ A função ```set_sprite(int reg, int x, int y, int offset, int activation_bit)`
 <p align="center">
     <img src="Imagens/sprites desenho monitor.png" alt="Função de Sprites" width="500">
     <br>
-    Figura 15. Exemplo desenho final com os sprites
+    Figura 16. Exemplo desenho final com os sprites
 </p>
 
 ### Conclusão
