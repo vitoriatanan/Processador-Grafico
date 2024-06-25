@@ -12,7 +12,7 @@ A plataforma DE1-SoC combina um processador ARM (HPS) com um processador gráfic
 
 </p>
 <p align="justify"> 
-A abordagem do projeto incluiu a implementação de funcionalidades para desenhar dois tipos de polígonos quadrados ou triângulos, renderização de sprites na tela VGA, além de desenhar background color e background block. Os módulos de Kernel Linux foram desenvolvidos para realizar a comunicação entre o HPS e a FPGA.
+A abordagem do projeto incluiu a implementação de funcionalidades para desenhar dois tipos de polígonos quadrados ou triângulos, renderização de sprites na tela VGA, além de desenhar background color e background block. Os módulos de Kernel Linux foram desenvolvidos para realizar a comunicação entre o HPS e o Processador Gráfico.
 
 O objetivo principal foi estabelecer uma comunicação eficiente entre o processador gráfico na FPGA da plataforma DE1-SoC e o HPS disponível na mesma plataforma.
 </p>
@@ -334,7 +334,7 @@ A função ```set_sprite(int reg, int x, int y, int offset, int activation_bit)`
 ### Conclusão
 
 <p align="justify">
-O objetivo deste projeto foi estabelecer uma comunicação eficiente entre o HPS e a FPGA. Os resultados alcançados foram satisfatórios, especialmente na geração de uma imagem estática. No entanto, para avançar em direção à geração de imagens dinâmicas, é necessário realizar estudos adicionais e desenvolver projetos futuros.
+O objetivo deste projeto foi estabelecer uma comunicação eficiente entre o HPS e o Processador Gráfico. Os resultados alcançados foram satisfatórios, especialmente na geração de uma imagem estática. No entanto, para avançar em direção à geração de imagens dinâmicas, é necessário realizar estudos adicionais e desenvolver projetos futuros.
 <p>
 
 <p align="justify">
@@ -342,8 +342,19 @@ Dentro do escopo proposto, foi possível efetuar a comunicação entre o softwar
 <p>
 
 <p align="justify">
-Em conclusão, o projeto mostrou que a comunicação entre o HPS e a FPGA é viável e eficaz para a geração de imagens estáticas. O próximo passo será aprofundar os estudos e os desenvolvimentos necessários para alcançar a geração de imagens dinâmicas.
+Em conclusão, o projeto mostrou que a comunicação entre o HPS e o Processador Gráfico é viável e eficaz para a geração de imagens estáticas. O próximo passo será aprofundar os estudos e os desenvolvimentos necessários para alcançar a geração de imagens dinâmicas.
 <p>
 
+### Referências
+
+<b>Character device drivers — The Linux Kernel documentation</b>. Disponível em: <https://linux-kernel-labs.github.io/refs/heads/master/labs/device_drivers.html>.
+
+<b>Memory mapping — The Linux Kernel documentation</b>. Disponível em: <https://linux-kernel-labs.github.io/refs/heads/master/labs/memory_mapping.html>.
+
+<b>Technologies, Terasic. DE1-SoC User Manual</b>. Disponível em: <http://www.ee.ic.ac.uk/pcheung/teaching/ee2_digital/de1-soc_user_manual.pdf.>
+
+SÁ BARRETO, Gabriel. <b>Desenvolvimento de uma Arquitetura Baseada em Sprites para criação de Jogos 2D em Ambientes Reconfiguráveis utilizando dispositivos FPGA</b>. s.d. 14 f. Trabalho de Conclusão de Curso (Graduação em Engenharia de Computação) Universidade Estadual de Feira de Santana, Bahia.
+
+<b>Lab 1: Acessando dispositivos de Hardware da FPGA</b>. Bahia: Universidade Estadual de Feira de Santana, 2024
 
 
